@@ -3,7 +3,6 @@ import XCTest
 @testable import OpenMarket
 
 class OpenMarketRequestAPITest: XCTestCase {
-    // Request API Model Test
 
     // RequestCreateItem Test
     func test_encode_RequestCreateItem() {

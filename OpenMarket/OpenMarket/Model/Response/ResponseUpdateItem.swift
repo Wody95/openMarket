@@ -10,9 +10,9 @@ struct ResponseUpdateItem: Decodable {
     let discountedPrice: Int?
     let thumbnails: [String]
     let images: [String]
-    let registrationDate: Int
+    let registrationDate: Double
 
-    enum Codingkeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case title
         case descriptions

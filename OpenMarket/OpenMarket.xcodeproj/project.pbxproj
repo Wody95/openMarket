@@ -17,6 +17,7 @@
 		70548D3226DCCBBB004ED445 /* ResponseDeleteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D3126DCCBBB004ED445 /* ResponseDeleteItem.swift */; };
 		70548D3A26DCCCB1004ED445 /* OpenMarketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D3926DCCCB1004ED445 /* OpenMarketTests.swift */; };
 		70AAEAA126DE18F300C631B0 /* OpenMarketRequestAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AAEAA026DE18F300C631B0 /* OpenMarketRequestAPITest.swift */; };
+		70AAEAA326DE200100C631B0 /* OpenMarketResponseAPITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AAEAA226DE200100C631B0 /* OpenMarketResponseAPITest.swift */; };
 		C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */; };
 		C70FB0FD25BEF61C00C9924E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */; };
 		C70FB0FF25BEF61C00C9924E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FE25BEF61C00C9924E /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 		70548D3926DCCCB1004ED445 /* OpenMarketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMarketTests.swift; sourceTree = "<group>"; };
 		70548D3B26DCCCB1004ED445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70AAEAA026DE18F300C631B0 /* OpenMarketRequestAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMarketRequestAPITest.swift; sourceTree = "<group>"; };
+		70AAEAA226DE200100C631B0 /* OpenMarketResponseAPITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenMarketResponseAPITest.swift; sourceTree = "<group>"; };
 		C70FB0F725BEF61C00C9924E /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,8 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				70548D2726DCC7FE004ED445 /* ResponseReadItems.swift */,
-				70548D2B26DCCAB0004ED445 /* ResponseCreateItem.swift */,
 				70548D2D26DCCB6B004ED445 /* ResponseReadItem.swift */,
+				70548D2B26DCCAB0004ED445 /* ResponseCreateItem.swift */,
 				70548D2F26DCCB98004ED445 /* ResponseUpdateItem.swift */,
 				70548D3126DCCBBB004ED445 /* ResponseDeleteItem.swift */,
 			);
@@ -145,6 +147,7 @@
 				70548D3926DCCCB1004ED445 /* OpenMarketTests.swift */,
 				70548D3B26DCCCB1004ED445 /* Info.plist */,
 				70AAEAA026DE18F300C631B0 /* OpenMarketRequestAPITest.swift */,
+				70AAEAA226DE200100C631B0 /* OpenMarketResponseAPITest.swift */,
 			);
 			path = OpenMarketTests;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				70AAEAA126DE18F300C631B0 /* OpenMarketRequestAPITest.swift in Sources */,
+				70AAEAA326DE200100C631B0 /* OpenMarketResponseAPITest.swift in Sources */,
 				70548D3A26DCCCB1004ED445 /* OpenMarketTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
