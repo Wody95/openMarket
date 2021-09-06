@@ -1,8 +1,8 @@
 import Foundation
 
 struct ResponseReadItems: Decodable {
-    private let page: Int
-    private let items: [Item]
+    let page: Int
+    let items: [Item]
 }
 
 struct Item: Decodable {
