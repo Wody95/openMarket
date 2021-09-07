@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		70548D2426DCC694004ED445 /* RequestCreateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D2326DCC694004ED445 /* RequestCreateItem.swift */; };
-		70548D2626DCC729004ED445 /* RequestUpdateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D2526DCC729004ED445 /* RequestUpdateItem.swift */; };
 		70548D2826DCC7FE004ED445 /* ResponseReadItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D2726DCC7FE004ED445 /* ResponseReadItems.swift */; };
 		70548D2A26DCCA5B004ED445 /* RequestDeleteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D2926DCCA5B004ED445 /* RequestDeleteItem.swift */; };
 		70548D2E26DCCB6B004ED445 /* ResponseReadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D2D26DCCB6B004ED445 /* ResponseReadItem.swift */; };
@@ -33,8 +31,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		70548D2326DCC694004ED445 /* RequestCreateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreateItem.swift; sourceTree = "<group>"; };
-		70548D2526DCC729004ED445 /* RequestUpdateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUpdateItem.swift; sourceTree = "<group>"; };
 		70548D2726DCC7FE004ED445 /* ResponseReadItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseReadItems.swift; sourceTree = "<group>"; };
 		70548D2926DCCA5B004ED445 /* RequestDeleteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDeleteItem.swift; sourceTree = "<group>"; };
 		70548D2D26DCCB6B004ED445 /* ResponseReadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseReadItem.swift; sourceTree = "<group>"; };
@@ -117,8 +113,6 @@
 		70548D2126DCC63C004ED445 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				70548D2326DCC694004ED445 /* RequestCreateItem.swift */,
-				70548D2526DCC729004ED445 /* RequestUpdateItem.swift */,
 				70548D2926DCCA5B004ED445 /* RequestDeleteItem.swift */,
 			);
 			path = Request;
@@ -281,11 +275,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70548D2426DCC694004ED445 /* RequestCreateItem.swift in Sources */,
 				C70FB0FF25BEF61C00C9924E /* ViewController.swift in Sources */,
 				70AAEAC826E0C78800C631B0 /* URLSessionModel.swift in Sources */,
 				70548D2A26DCCA5B004ED445 /* RequestDeleteItem.swift in Sources */,
-				70548D2626DCC729004ED445 /* RequestUpdateItem.swift in Sources */,
 				70548D2826DCC7FE004ED445 /* ResponseReadItems.swift in Sources */,
 				70548D2E26DCCB6B004ED445 /* ResponseReadItem.swift in Sources */,
 				C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */,
