@@ -49,10 +49,10 @@ enum ServerAPI {
 }
 
 class URLSessionModel {
-    private let session: URLSession
-    private let baseURL = "https://camp-open-market-2.herokuapp.com/"
+    let session: URLSessionProtocol
+    let baseURL = "https://camp-open-market-2.herokuapp.com/"
 
-    init(session: URLSession = .shared) {
+    init(session: URLSessionProtocol = URLSession.shared) {
         self.session = session
     }
 
