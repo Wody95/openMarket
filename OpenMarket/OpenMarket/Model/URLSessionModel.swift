@@ -22,10 +22,9 @@ class URLSessionModel {
         self.session = session
     }
 
-    func responseData(urlPath: String, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
-        let url = URL(string: baseURL + urlPath)!
+    func dataTask(request: URLRequest, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
 
-        let task = session.dataTask(with: url) { data, response, error in
+        let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
                 return completionHandler(.failure(.unknownError))
             }
@@ -36,7 +35,7 @@ class URLSessionModel {
             }
 
             if let data = data {
-                completionHandler(.success(data))
+                return completionHandler(.success(data))
             } else {
                 return completionHandler(.failure(.dataError))
             }

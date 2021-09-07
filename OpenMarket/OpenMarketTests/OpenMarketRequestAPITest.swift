@@ -6,7 +6,7 @@ class OpenMarketRequestAPITest: XCTestCase {
 
     // RequestCreateItem Test
     func test_encode_RequestCreateItem() {
-        let newItme = RequestCreateItem(title: "newItem",
+        let newItem = RequestCreateItem(title: "newItem",
                                         descriptions: "newItem_descriptions",
                                         price: 10000,
                                         currency: "KRW",
@@ -15,7 +15,7 @@ class OpenMarketRequestAPITest: XCTestCase {
                                         images: ["https://www.google.com/url?sa=i&url=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ATest-Logo.svg&psig=AOvVaw2M6t5dGULeeIpuP8akpheQ&ust=1630483537398000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOiKudPm2vICFQAAAAAdAAAAABAJ"],
                                         password: "0000")
 
-        guard let _ = try? JSONEncoder().encode(newItme) else {
+        guard let _ = try? JSONEncoder().encode(newItem) else {
             XCTFail()
             return
         }
