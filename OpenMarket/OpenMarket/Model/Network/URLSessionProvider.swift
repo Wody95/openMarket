@@ -1,54 +1,6 @@
-//
-//  URLSession.swift
-//  OpenMarket
-//
-//  Created by 기원우 on 2021/09/02.
-//
-
 import Foundation
 
-enum URLSessionDataTaskError: Error {
-    case unknownError
-    case badURL
-    case httpCodeError
-    case dataError
-}
-
-enum ServerAPI {
-    case getItems, getItem, postItem, patchItem, deleteItem
-
-    var path: String {
-        switch self {
-        case .getItems:
-            return "items/"
-        case .getItem:
-            return "item/"
-        case .postItem:
-            return "item"
-        case .patchItem:
-            return "item/"
-        case .deleteItem:
-            return "item/"
-        }
-    }
-
-    var method: String {
-        switch self {
-        case .getItems:
-            return "GET"
-        case .getItem:
-            return "GET"
-        case .postItem:
-            return "POST"
-        case .patchItem:
-            return "PATCH"
-        case .deleteItem:
-            return "DELETE"
-        }
-    }
-}
-
-class URLSessionModel {
+class URLSessionProvider {
     let session: URLSessionProtocol
     let baseURL = "https://camp-open-market-2.herokuapp.com/"
 
@@ -57,7 +9,6 @@ class URLSessionModel {
     }
 
     func dataTask(request: URLRequest, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
-
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil {
                 return completionHandler(.failure(.unknownError))
@@ -78,7 +29,6 @@ class URLSessionModel {
     }
 
     func createBody(parameters: [String: Any], boundary: String, images: [ImageFile]?) -> Data {
-
         var body = Data()
         let boundaryPrefix = "--\(boundary)\r\n"
 
@@ -89,21 +39,21 @@ class URLSessionModel {
         }
 
         if let images = images {
-            for (index, image) in images.enumerated() {
+            for image in images {
                 body.append(boundaryPrefix.data(using: .utf8)!)
-                body.append("Content-Disposition: form-data; name=\"images[\(index)]\"; filename=\"\(image.filename)\"\\r\n\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"images[]\"; filename=\"\(image.filename)\"\r\n".data(using: .utf8)!)
                 body.append("Content-Type: image/\(image.type)\r\n\r\n".data(using: .utf8)!)
                 body.append(image.data)
+                body.append("\r\n".data(using: .utf8)!)
             }
         }
 
-        body.append("\r\n\(boundaryPrefix)".data(using: .utf8)!)
+        body.append(boundaryPrefix.data(using: .utf8)!)
 
         return body
     }
 
     func getItems(page: Int, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
-
         guard let url = URL(string: baseURL + ServerAPI.getItems.path + "\(page)") else {
             return completionHandler(.failure(.badURL))
         }
@@ -115,7 +65,6 @@ class URLSessionModel {
     }
 
     func getItem(id: Int, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
-
         guard let url = URL(string: baseURL + ServerAPI.getItem.path + "\(id)") else {
             return completionHandler(.failure(.badURL))
         }
@@ -126,15 +75,28 @@ class URLSessionModel {
         dataTask(request: request, completionHandler: completionHandler)
     }
 
-    func requestItem(params: [String: Any], images: [ImageFile], serverAPI: ServerAPI, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
-
+    func postItem(params: [String: Any], images: [ImageFile], completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
         let boundary = "Boundary-\(UUID().uuidString)"
-        guard let url = URL(string: baseURL + serverAPI.path) else {
+        guard let url = URL(string: baseURL + ServerAPI.postItem.path) else {
             return completionHandler(.failure(.badURL))
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = serverAPI.method
+        request.httpMethod = ServerAPI.postItem.method
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpBody = createBody(parameters: params, boundary: boundary, images: images)
+
+        dataTask(request: request, completionHandler: completionHandler)
+    }
+
+    func patchItem(id: Int, params: [String: Any], images: [ImageFile]?, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
+        let boundary = "Boundary-\(UUID().uuidString)"
+        guard let url = URL(string: baseURL + ServerAPI.patchItem.path + "\(id)") else {
+            return completionHandler(.failure(.badURL))
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = ServerAPI.patchItem.method
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.httpBody = createBody(parameters: params, boundary: boundary, images: images)
 
@@ -142,8 +104,7 @@ class URLSessionModel {
     }
 
     func deleteItem(id: Int, password: String, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void ) {
-
-        let deleteData = RequestDeleteItem(password: password)
+        let deleteData = OpenMarket.deleteItem(password: password)
 
         guard let json = try? JSONEncoder().encode(deleteData) else {
             return completionHandler(.failure(.unknownError))

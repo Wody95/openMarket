@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "postItem.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

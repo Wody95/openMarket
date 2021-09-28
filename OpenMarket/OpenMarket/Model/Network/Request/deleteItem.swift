@@ -1,5 +1,5 @@
 import Foundation
 
-struct RequestDeleteItem: Encodable {
+struct deleteItem: Encodable {
     let password: String
 }

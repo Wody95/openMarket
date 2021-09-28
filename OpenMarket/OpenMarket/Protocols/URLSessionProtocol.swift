@@ -1,10 +1,3 @@
-//
-//  URLSessionProtocol.swift
-//  OpenMarket
-//
-//  Created by 기원우 on 2021/09/07.
-//
-
 import Foundation
 
 protocol URLSessionProtocol {
@@ -13,4 +6,3 @@ protocol URLSessionProtocol {
 }
 
 extension URLSession: URLSessionProtocol {}
-

@@ -1,16 +1,4 @@
-//
-//  MockURLSession.swift
-//  OpenMarket
-//
-//  Created by 기원우 on 2021/09/07.
-//
-
 import UIKit
-
-struct Sample {
-    var sampleItemData = NSDataAsset(name: "Item")
-    var sampleItemsData = NSDataAsset(name: "Items")
-}
 
 class MockURLSessionDataTask: URLSessionDataTask {
     var resumeDidCall: () -> Void = {}
@@ -23,6 +11,9 @@ class MockURLSessionDataTask: URLSessionDataTask {
 class MockURLSession: URLSessionProtocol {
     var isRequestSuccess: Bool
     var sessionDataTask: MockURLSessionDataTask?
+    var resultData: Data?
+    var successResponse: HTTPURLResponse?
+    var failureResponse: HTTPURLResponse?
 
     init(isRequestSuccess: Bool = true) {
         self.isRequestSuccess = isRequestSuccess
@@ -30,23 +21,21 @@ class MockURLSession: URLSessionProtocol {
 
     func dataTask(with request: URLRequest,
                   completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        let successResponse = HTTPURLResponse(url: request.url!,
-                                              statusCode: 200,
-                                              httpVersion: "2", headerFields: nil)
-        let failureResponse = HTTPURLResponse(url: request.url!,
-                                              statusCode: 402,
-                                              httpVersion: "2",
-                                              headerFields: nil)
 
         let sessionDataTask = MockURLSessionDataTask()
 
+        guard let resultData = self.resultData,
+              let successResponse = self.successResponse,
+              let failureResponse = self.failureResponse else { return sessionDataTask }
+
         if isRequestSuccess {
-            sessionDataTask.resumeDidCall = { completionHandler(Sample().sampleItemData?.data, successResponse, nil)
+            sessionDataTask.resumeDidCall = { completionHandler(resultData, successResponse, nil)
             }
         } else {
             sessionDataTask.resumeDidCall = { completionHandler(nil, failureResponse, nil)
             }
         }
+
         self.sessionDataTask = sessionDataTask
         return sessionDataTask
     }

@@ -1,0 +1,18 @@
+{
+    "id": 500,
+    "title": "postItem",
+    "descriptions": "postItemdescriptions",
+    "price": 1000,
+    "currency": "KRW",
+    "stock": 500,
+    "discounted_price" : 700,
+    "thumbnails": [
+        "https://camp-open-market.s3.ap-northeast-2.amazonaws.com/thumbnails/1-1.png",
+        "https://camp-open-market.s3.ap-northeast-2.amazonaws.com/thumbnails/1-2.png"
+    ],
+    "images": [
+        "https://camp-open-market.s3.ap-northeast-2.amazonaws.com/images/1-1.png",
+        "https://camp-open-market.s3.ap-northeast-2.amazonaws.com/images/1-2.png"
+    ],
+    "registration_date": 1611523563.719116
+}
