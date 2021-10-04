@@ -58,6 +58,8 @@ class URLSessionProvider {
             return completionHandler(.failure(.badURL))
         }
 
+        print(url.absoluteURL)
+
         var request = URLRequest(url: url)
         request.httpMethod = ServerAPI.getItems.method
 

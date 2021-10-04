@@ -21,7 +21,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
 
-        self.contentView.backgroundColor = .gray
+        self.contentView.backgroundColor = .white
 
         configureTitleLabel()
     }
