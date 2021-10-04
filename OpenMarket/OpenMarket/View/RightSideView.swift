@@ -3,7 +3,6 @@ import UIKit
 class RightSideView: UIView {
     let listAndGridImage = UIImage(systemName: "list.dash")
     let listAndGridButton = UIButton(type: .system)
-
     let addItemImage = UIImage(systemName: "plus")
     let addItemView = UIButton(type: .system)
 
