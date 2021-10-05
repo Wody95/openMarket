@@ -7,6 +7,7 @@ class ViewController: UIViewController {
     let rightSideView = RightSideView(frame: CGRect(x: 0, y: 0, width: 70, height: 37))
     var collectionView = ItemCollectionView(frame: .zero,
                                             collectionViewLayout: UICollectionViewFlowLayout())
+    var fetchingMore = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,18 @@ class ViewController: UIViewController {
 
     private func setupItemManager() {
         itemManager.delegate = self
-        self.itemManager.readItems(page: self.itemManager.lastPage)
+        self.itemManager.readItems()
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (collectionView.contentOffset.y * 1.2) > (collectionView.contentSize.height - collectionView.bounds.size.height) {
+
+            if fetchingMore {
+                fetchingMore = false
+
+                self.itemManager.readItems()
+            }
+        }
     }
 }
 
@@ -60,6 +72,10 @@ class ViewController: UIViewController {
 extension ViewController: ViewControllerDelegate {
     func reloadCollectionView() {
         self.collectionView.reloadData()
+
+        if !self.fetchingMore {
+            self.fetchingMore = true
+        }
     }
 
     func didTapViewMode() {

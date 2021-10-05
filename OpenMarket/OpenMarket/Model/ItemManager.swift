@@ -11,10 +11,10 @@ class ItemManager {
     }
 
     // TODO : failure 에러 처리
-    func readItems(page: Int) {
+    func readItems() {
         guard let delegate = self.delegate else { return }
 
-        urlsessionProvider.getItems(page: page) { [weak self] result in
+        urlsessionProvider.getItems(page: self.lastPage) { [weak self] result in
             switch result {
             case .success(let data):
                 guard let decodeData = try? JSONDecoder().decode(getItems.self, from: data) else { return }
