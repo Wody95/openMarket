@@ -4,6 +4,7 @@ class ItemManager {
     let urlsessionProvider: URLSessionProvider
     var items: [Item] = []
     var lastPage = 1
+    var delegate: ViewControllerDelegate?
 
     init(urlsession: URLSessionProvider) {
         self.urlsessionProvider = urlsession
@@ -11,14 +12,20 @@ class ItemManager {
 
     // TODO : failure 에러 처리
     func readItems(page: Int) {
-        urlsessionProvider.getItems(page: page) { result in
+        guard let delegate = self.delegate else { return }
+
+        urlsessionProvider.getItems(page: page) { [weak self] result in
             switch result {
             case .success(let data):
-                print("success")
                 guard let decodeData = try? JSONDecoder().decode(getItems.self, from: data) else { return }
                 
-                self.items += decodeData.items
-                self.lastPage += 1
+                self?.items += decodeData.items
+                self?.lastPage += 1
+
+                DispatchQueue.main.async {
+                    delegate.reloadCollectionView()
+                }
+
             case .failure(let error):
                 print(error)
             }

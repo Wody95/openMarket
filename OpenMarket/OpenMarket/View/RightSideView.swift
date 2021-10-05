@@ -1,8 +1,6 @@
 import UIKit
 
-enum ViewMode {
-    case list, grid
-}
+
 
 class RightSideView: UIView {
     private let listViewModeImage = UIImage(systemName: "list.dash")

@@ -1,11 +1,6 @@
 import UIKit
 import SnapKit
 
-protocol ViewControllerDelegate {
-    func didTapViewMode()
-    func readItemsData()
-}
-
 @available(iOS 14.0, *)
 class ViewController: UIViewController {
     let itemManager = ItemManager(urlsession: URLSessionProvider())
@@ -13,18 +8,13 @@ class ViewController: UIViewController {
     var collectionView = ItemCollectionView(frame: .zero,
                                             collectionViewLayout: UICollectionViewFlowLayout())
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        DispatchQueue.main.async {
-            self.itemManager.readItems(page: self.itemManager.lastPage)
-            self.view.setNeedsLayout()
-        }
 
         configureNavigationBar()
         configureCollectionView()
         setupCollectionViewLayout()
+        setupItemManager()
     }
 
     private func configureNavigationBar() {
@@ -58,13 +48,18 @@ class ViewController: UIViewController {
             collectionView.collectionViewLayout = configGrid
         }
     }
+
+    private func setupItemManager() {
+        itemManager.delegate = self
+        self.itemManager.readItems(page: self.itemManager.lastPage)
+    }
 }
 
 // - MARK: ViewControllerDelegate
 @available(iOS 14.0, *)
 extension ViewController: ViewControllerDelegate {
-    func readItemsData() {
-        self.view.setNeedsLayout()
+    func reloadCollectionView() {
+        self.collectionView.reloadData()
     }
 
     func didTapViewMode() {
