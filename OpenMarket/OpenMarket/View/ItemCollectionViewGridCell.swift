@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ItemCollectionViewCell: UICollectionViewCell {
+class ItemCollectionViewGridCell: UICollectionViewCell {
     static let identifier = "ItemCollectionViewCell"
 
     private let titleLabel: UILabel = {

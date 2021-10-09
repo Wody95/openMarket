@@ -25,8 +25,8 @@ class ViewController: UIViewController {
     }
 
     private func configureCollectionView() {
-        collectionView.register(ItemCollectionViewCell.self,
-                                forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
+        collectionView.register(ItemCollectionViewListCell.self,
+                                forCellWithReuseIdentifier: ItemCollectionViewListCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,10 +101,16 @@ extension ViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath) as? ItemCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewListCell.identifier, for: indexPath) as? ItemCollectionViewListCell else { return UICollectionViewCell() }
 
-        let itemTitle = self.itemManager.items[indexPath.row].title
-        cell.setupTitleText(text: itemTitle)
+        let item = self.itemManager.items[indexPath.row]
+        cell.setupTitleText(text: item.title)
+        cell.setupStockText(stock: item.stock)
+        cell.setupPriceText(price: item.price, currency: item.currency)
+
+        if let discountPrice = item.discountedPrice {
+            cell.setupDiscountPriceText(price: discountPrice, curency: item.currency)
+        }
 
         return cell
     }
