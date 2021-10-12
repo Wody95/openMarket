@@ -26,6 +26,7 @@
 		70AAEAC826E0C78800C631B0 /* URLSessionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AAEAC726E0C78800C631B0 /* URLSessionProvider.swift */; };
 		70D05F99270BE74000466B0A /* ViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D05F98270BE74000466B0A /* ViewControllerDelegate.swift */; };
 		70D05F9B270BE76200466B0A /* ViewMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D05F9A270BE76200466B0A /* ViewMode.swift */; };
+		70F08A8B2715C2C4000D74BC /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F08A8A2715C2C4000D74BC /* NSMutableAttributedString.swift */; };
 		C70FB0FB25BEF61C00C9924E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */; };
 		C70FB0FD25BEF61C00C9924E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */; };
 		C70FB0FF25BEF61C00C9924E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB0FE25BEF61C00C9924E /* ViewController.swift */; };
@@ -64,6 +65,7 @@
 		70AAEAC726E0C78800C631B0 /* URLSessionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProvider.swift; sourceTree = "<group>"; };
 		70D05F98270BE74000466B0A /* ViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegate.swift; sourceTree = "<group>"; };
 		70D05F9A270BE76200466B0A /* ViewMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewMode.swift; sourceTree = "<group>"; };
+		70F08A8A2715C2C4000D74BC /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 		C70FB0F725BEF61C00C9924E /* OpenMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70FB0FA25BEF61C00C9924E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C70FB0FC25BEF61C00C9924E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,9 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				70943741270ADBFA00244386 /* NavigationBarView */,
+				70F08A882715940F000D74BC /* Cell */,
 				70943746270AE4B300244386 /* ItemCollectionView.swift */,
-				70943748270AE4DB00244386 /* ItemCollectionViewListCell.swift */,
-				7028274F2711AF9B001EAB3B /* ItemCollectionViewGridCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,6 +213,23 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
+		70F08A882715940F000D74BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				70943748270AE4DB00244386 /* ItemCollectionViewListCell.swift */,
+				7028274F2711AF9B001EAB3B /* ItemCollectionViewGridCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		70F08A892715C2A2000D74BC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				70F08A8A2715C2C4000D74BC /* NSMutableAttributedString.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C70FB0EE25BEF61C00C9924E = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +253,7 @@
 			children = (
 				70548D1426DCC407004ED445 /* SupportFiles */,
 				70548D1526DCC419004ED445 /* Entry */,
+				70F08A892715C2A2000D74BC /* Extension */,
 				70793B3126E75A300050B7F7 /* Protocols */,
 				706CB3342701972B0008274C /* Enum */,
 				703D237726E9BDD300FFCA6B /* Mock */,
@@ -369,6 +388,7 @@
 				70943749270AE4DB00244386 /* ItemCollectionViewListCell.swift in Sources */,
 				70D05F9B270BE76200466B0A /* ViewMode.swift in Sources */,
 				70AAEAC826E0C78800C631B0 /* URLSessionProvider.swift in Sources */,
+				70F08A8B2715C2C4000D74BC /* NSMutableAttributedString.swift in Sources */,
 				70548D2A26DCCA5B004ED445 /* deleteItem.swift in Sources */,
 				70943747270AE4B300244386 /* ItemCollectionView.swift in Sources */,
 				70548D2826DCC7FE004ED445 /* getItems.swift in Sources */,

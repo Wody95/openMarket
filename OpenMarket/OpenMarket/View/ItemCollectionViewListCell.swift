@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 class ItemCollectionViewListCell: UICollectionViewCell {
-    static let identifier = "ItemCollectionViewCell"
+    static let identifier = "ItemCollectionViewListCell"
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -34,13 +34,6 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         return label
     }()
 
-    private let currencyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "currencyLabel"
-
-        return label
-    }()
-
     private let thumbnailImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "testImage")
@@ -63,7 +56,18 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         configureTitleLabel()
         configureStockLabel()
         configurePriceLabel()
-        configureCurrencyLabel()
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        self.titleLabel.text = nil
+        self.priceLabel.attributedText = nil
+        self.priceLabel.text = nil
+        self.priceLabel.textColor = .black
+        self.stockLabel.text = nil
+        self.stockLabel.textColor = .black
+        self.discountPriceLabel.text = nil
     }
 
     private func configureThumbnailImageView() {
@@ -72,7 +76,8 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         thumbnailImageView.snp.makeConstraints { view in
             view.width.equalTo(60)
             view.height.equalTo(50)
-            view.top.leading.bottom.equalTo(self.contentView).inset(5)
+            view.top.leading.equalTo(self.contentView).inset(5)
+            view.bottom.lessThanOrEqualTo(self.contentView).inset(5)
 
         }
     }
@@ -90,6 +95,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         contentView.addSubview(stockLabel)
 
         stockLabel.snp.makeConstraints { label in
+            label.width.lessThanOrEqualTo(120)
             label.top.equalTo(titleLabel.snp.top)
             label.trailing.equalTo(self.contentView).inset(5)
             label.leading.greaterThanOrEqualTo(titleLabel.snp.trailing).offset(10)
@@ -106,8 +112,15 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         }
     }
 
-    private func configureCurrencyLabel() {
-        contentView.addSubview(currencyLabel)
+    func setupItem(item: Item) {
+        setupTitleText(text: item.title)
+        setupStockText(stock: item.stock)
+        setupPriceText(price: item.price, currency: item.currency)
+
+        if let discountPrice = item.discountedPrice {
+            setupDiscountPriceText(price: discountPrice, curency: item.currency)
+        }
+
     }
 
     func setupTitleText(text: String) {
@@ -115,7 +128,15 @@ class ItemCollectionViewListCell: UICollectionViewCell {
     }
 
     func setupStockText(stock: Int) {
-        let text = "\(stock)"
+        var text = "잔여수량 : \(stock)"
+
+        if stock >= 100 {
+            text = "잔여수량 : 99+"
+        } else if stock == 0 {
+            text = "품절"
+            self.stockLabel.textColor = .orange
+        }
+
         self.stockLabel.text = text
     }
 
@@ -137,9 +158,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
             }
 
             priceLabel.textColor = .red
-            let attributeString = NSMutableAttributedString(string: priceText)
-            attributeString.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
-            priceLabel.attributedText = attributeString
+            priceLabel.attributedText = NSMutableAttributedString().strikethroughStyle(string: priceText)
         }
     }
 

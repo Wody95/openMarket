@@ -16,7 +16,7 @@ class RightSideView: UIView {
 
         viewModeButton.frame = CGRect(x: 10, y: 8, width: 20, height: 20)
         viewModeButton.setImage(gridViewModeImage, for: .normal)
-        viewModeButton.addTarget(superview, action: #selector(didTapViewModeButton), for: .touchUpInside)
+        viewModeButton.addTarget(self.superview, action: #selector(didTapViewModeButton), for: .touchUpInside)
         self.addSubview(viewModeButton)
 
 
@@ -41,7 +41,6 @@ class RightSideView: UIView {
         }
 
         DispatchQueue.main.async {
-            self.setNeedsLayout()
             delegate.didTapViewMode()
         }
     }

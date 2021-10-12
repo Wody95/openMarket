@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     private func configureCollectionView() {
         collectionView.register(ItemCollectionViewListCell.self,
                                 forCellWithReuseIdentifier: ItemCollectionViewListCell.identifier)
+        collectionView.register(ItemCollectionViewGridCell.self,
+                                forCellWithReuseIdentifier: ItemCollectionViewGridCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +54,9 @@ class ViewController: UIViewController {
 
     private func setupItemManager() {
         itemManager.delegate = self
-        self.itemManager.readItems()
+        if itemManager.items.count == 0 {
+            self.itemManager.readItems()
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -79,10 +83,11 @@ extension ViewController: ViewControllerDelegate {
     }
 
     func didTapViewMode() {
-        let topIndex = IndexPath(row: 0, section: 0)
         self.setupCollectionViewLayout()
-        self.collectionView.scrollToItem(at: topIndex, at: .top, animated: false)
-        self.view.setNeedsLayout()
+        self.collectionView.scrollToTop()
+        self.collectionView.reloadDataCompletion {
+            self.collectionView.setNeedsLayout()
+        }
     }
 }
 
@@ -101,18 +106,24 @@ extension ViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewListCell.identifier, for: indexPath) as? ItemCollectionViewListCell else { return UICollectionViewCell() }
 
         let item = self.itemManager.items[indexPath.row]
-        cell.setupTitleText(text: item.title)
-        cell.setupStockText(stock: item.stock)
-        cell.setupPriceText(price: item.price, currency: item.currency)
 
-        if let discountPrice = item.discountedPrice {
-            cell.setupDiscountPriceText(price: discountPrice, curency: item.currency)
+        if rightSideView.itemViewMode == .list {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewListCell.identifier, for: indexPath) as? ItemCollectionViewListCell else { return UICollectionViewCell() }
+
+
+            cell.setupItem(item: item)
+
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewGridCell.identifier, for: indexPath) as? ItemCollectionViewGridCell else { return UICollectionViewCell() }
+
+            cell.setupItem(item: item)
+
+            return cell
         }
 
-        return cell
     }
 }
 
