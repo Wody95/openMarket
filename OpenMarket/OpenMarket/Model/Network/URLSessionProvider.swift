@@ -103,7 +103,7 @@ class URLSessionProvider {
         dataTask(request: request, completionHandler: completionHandler)
     }
 
-    func deleteItem(id: Int, password: String, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void ) {
+    func deleteItem(id: Int, password: String, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
         let deleteData = OpenMarket.deleteItem(password: password)
 
         guard let json = try? JSONEncoder().encode(deleteData) else {
@@ -118,6 +118,15 @@ class URLSessionProvider {
         request.httpMethod = ServerAPI.deleteItem.method
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = json
+
+        dataTask(request: request, completionHandler: completionHandler)
+    }
+
+    func downloadImage(url: String, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
+        guard let url = URL(string: url) else { return completionHandler(.failure(.badURL)) }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
 
         dataTask(request: request, completionHandler: completionHandler)
     }

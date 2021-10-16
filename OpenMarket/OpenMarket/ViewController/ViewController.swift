@@ -106,7 +106,6 @@ extension ViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let item = self.itemManager.items[indexPath.row]
 
         if rightSideView.itemViewMode == .list {
@@ -115,18 +114,25 @@ extension ViewController: UICollectionViewDataSource {
 
             cell.setupItem(item: item)
 
+            DispatchQueue.main.async {
+                cell.setupThumbnailImage(image: self.itemManager.downloadImage(index: indexPath.row))
+            }
+
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewGridCell.identifier, for: indexPath) as? ItemCollectionViewGridCell else { return UICollectionViewCell() }
 
             cell.setupItem(item: item)
 
+            DispatchQueue.main.async {
+                cell.setupThumbnailImage(image: self.itemManager.downloadImage(index: indexPath.row))
+            }
+
             return cell
         }
 
     }
 }
-
 
 // - MARK: UICollectionViewFlowLayout
 @available(iOS 14.0, *)

@@ -120,7 +120,6 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         if let discountPrice = item.discountedPrice {
             setupDiscountPriceText(price: discountPrice, curency: item.currency)
         }
-
     }
 
     func setupTitleText(text: String) {
@@ -162,7 +161,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         }
     }
 
-    func setupThumbnailImage(image: UIImage) {
+    func setupThumbnailImage(image: UIImage?) {
         self.thumbnailImageView.image = image
     }
 }
