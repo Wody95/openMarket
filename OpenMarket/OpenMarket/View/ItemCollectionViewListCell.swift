@@ -86,6 +86,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
 
         titleLabel.snp.makeConstraints { label in
+            label.width.lessThanOrEqualTo(180)
             label.top.equalTo(thumbnailImageView.snp.top)
             label.leading.equalTo(thumbnailImageView.snp.trailing).offset(5)
         }
