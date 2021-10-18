@@ -95,7 +95,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         contentView.addSubview(stockLabel)
 
         stockLabel.snp.makeConstraints { label in
-            label.width.lessThanOrEqualTo(120)
+            label.width.greaterThanOrEqualTo(30)
             label.top.equalTo(titleLabel.snp.top)
             label.trailing.equalTo(self.contentView).inset(5)
             label.leading.greaterThanOrEqualTo(titleLabel.snp.trailing).offset(10)
