@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 @available(iOS 14.0, *)
-class ViewController: UIViewController {
+class ItemListViewController: UIViewController {
     let itemManager = ItemManager(urlsession: URLSessionProvider())
     let rightSideView = RightSideView(frame: CGRect(x: 0, y: 0, width: 70, height: 37))
     var collectionView = ItemCollectionView(frame: .zero,
@@ -72,8 +72,14 @@ class ViewController: UIViewController {
 }
 
 // - MARK: ViewControllerDelegate
+protocol ViewControllerDelegate {
+    func reloadCollectionView()
+    func didTapViewMode()
+    func didTapAddItemButton()
+}
+
 @available(iOS 14.0, *)
-extension ViewController: ViewControllerDelegate {
+extension ItemListViewController: ViewControllerDelegate {
     func reloadCollectionView() {
         self.collectionView.reloadData()
 
@@ -89,17 +95,21 @@ extension ViewController: ViewControllerDelegate {
             self.collectionView.setNeedsLayout()
         }
     }
+
+    func didTapAddItemButton() {
+        self.navigationController?.pushViewController(RegistryItemViewController(), animated: false)
+    }
 }
 
 // - MARK: UICollectionViewDelegate
 @available(iOS 14.0, *)
-extension ViewController: UICollectionViewDelegate {
+extension ItemListViewController: UICollectionViewDelegate {
 
 }
 
 // - MARK: UICollecdtionViewDataSource
 @available(iOS 14.0, *)
-extension ViewController: UICollectionViewDataSource {
+extension ItemListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
         return self.itemManager.items.count
@@ -136,7 +146,7 @@ extension ViewController: UICollectionViewDataSource {
 
 // - MARK: UICollectionViewFlowLayout
 @available(iOS 14.0, *)
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension ItemListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width/2.1, height: view.frame.height/3.3)
     }

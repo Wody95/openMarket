@@ -3,7 +3,7 @@ import UIKit
 class ItemManager {
     let urlsessionProvider: URLSessionProvider
     var items: [Item] = []
-    var images: [UIImage?] = []
+    var thumbnailImages: [UIImage?] = []
     var lastPage = 1
     var delegate: ViewControllerDelegate?
 
@@ -23,8 +23,10 @@ class ItemManager {
                 self?.items += decodeData.items
                 self?.lastPage += 1
 
-                for _ in 1...decodeData.items.count {
-                    self?.images.append(nil)
+                if decodeData.items.count >= 1 {
+                    for _ in 1...decodeData.items.count {
+                        self?.thumbnailImages.append(nil)
+                    }
                 }
 
                 DispatchQueue.main.async {
@@ -38,8 +40,8 @@ class ItemManager {
     }
 
     func downloadImage(index: Int) -> UIImage? {
-        if (self.images[index] != nil) {
-            return self.images[index]
+        if (self.thumbnailImages[index] != nil) {
+            return self.thumbnailImages[index]
         } else {
             let item = self.items[index]
             var result: UIImage?
@@ -49,7 +51,7 @@ class ItemManager {
                let image = UIImage(data: data) {
 
                 result = image
-                self.images[index] = image
+                self.thumbnailImages[index] = image
             }
 
             return result

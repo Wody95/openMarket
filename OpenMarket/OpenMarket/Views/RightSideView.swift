@@ -1,32 +1,41 @@
 import UIKit
 
-
-
 class RightSideView: UIView {
     private let listViewModeImage = UIImage(systemName: "list.dash")
     private let gridViewModeImage = UIImage(systemName: "square.grid.2x2.fill")
     private let viewModeButton = UIButton(type: .system)
+
     private let addItemImage = UIImage(systemName: "plus")
-    private let addItemView = UIButton(type: .system)
+    private let addItemViewButton = UIButton(type: .system)
+
     var viewControllerDelegate: ViewControllerDelegate?
     var itemViewMode: ViewMode = .list
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        viewModeButton.frame = CGRect(x: 10, y: 8, width: 20, height: 20)
-        viewModeButton.setImage(gridViewModeImage, for: .normal)
-        viewModeButton.addTarget(self.superview, action: #selector(didTapViewModeButton), for: .touchUpInside)
-        self.addSubview(viewModeButton)
-
-
-        addItemView.frame = CGRect(x: 50, y: 10, width: 16, height: 16)
-        addItemView.setImage(addItemImage, for: .normal)
-        self.addSubview(addItemView)
+        configureViewModeButton()
+        configureAddItemViewButton()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func configureViewModeButton() {
+        self.addSubview(viewModeButton)
+
+        viewModeButton.frame = CGRect(x: 10, y: 8, width: 20, height: 20)
+        viewModeButton.setImage(gridViewModeImage, for: .normal)
+        viewModeButton.addTarget(self.superview, action: #selector(didTapViewModeButton), for: .touchUpInside)
+    }
+
+    private func configureAddItemViewButton() {
+        self.addSubview(addItemViewButton )
+
+        addItemViewButton.frame = CGRect(x: 50, y: 10, width: 16, height: 16)
+        addItemViewButton.setImage(addItemImage, for: .normal)
+        addItemViewButton.addTarget(self, action: #selector(didTapAddItemButton), for: .touchUpInside)
     }
 
     @objc func didTapViewModeButton() {
@@ -43,5 +52,11 @@ class RightSideView: UIView {
         DispatchQueue.main.async {
             delegate.didTapViewMode()
         }
+    }
+
+    @objc func didTapAddItemButton() {
+        guard let delegate = viewControllerDelegate else { return }
+
+        delegate.didTapAddItemButton()
     }
 }

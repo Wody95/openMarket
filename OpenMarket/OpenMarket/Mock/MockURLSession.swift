@@ -1,5 +1,6 @@
 import UIKit
 
+@available(iOS 14, *)
 class MockURLSessionDataTask: URLSessionDataTask {
     var resumeDidCall: () -> Void = {}
 
@@ -8,6 +9,7 @@ class MockURLSessionDataTask: URLSessionDataTask {
     }
 }
 
+@available(iOS 14, *)
 class MockURLSession: URLSessionProtocol {
     var isRequestSuccess: Bool
     var sessionDataTask: MockURLSessionDataTask?
