@@ -43,6 +43,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
 
         imageAddButton.setTitle("사진추가", for: .normal)
         imageAddButton.addTarget(self, action: #selector(didTapAddImageButton), for: .touchUpInside)
+        imageAddButton.translatesAutoresizingMaskIntoConstraints = false
 
         imageAddButton.snp.makeConstraints { button in
             button.centerX.equalTo(self.contentView)
@@ -54,6 +55,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(imageCountLabel)
 
         imageCountLabel.text = "0/5"
+        imageCountLabel.translatesAutoresizingMaskIntoConstraints = false
 
         imageCountLabel.snp.makeConstraints { label in
             label.centerX.equalTo(self.contentView)
@@ -65,6 +67,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
         self.addSubview(imageView)
 
         imageView.backgroundColor = .white
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
         imageView.snp.makeConstraints { view in
             view.top.bottom.leading.trailing.equalTo(self.contentView)
         }

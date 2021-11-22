@@ -94,7 +94,7 @@ class URLSessionProvider {
 
         dataTask(request: request, completionHandler: completionHandler)
     }
-
+    
     func getItem(id: Int, completionHandler: @escaping (Result<Data, URLSessionDataTaskError>) -> Void) {
         guard let url = URL(string: baseURL + ServerAPI.getItem.path + "\(id)") else {
             return completionHandler(.failure(.badURL))

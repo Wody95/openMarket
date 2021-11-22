@@ -91,8 +91,9 @@ extension ItemListViewController: ViewControllerDelegate {
     func didTapViewMode() {
         self.setupCollectionViewLayout()
         self.collectionView.scrollToTop()
-        self.collectionView.reloadDataCompletion {
-            self.collectionView.setNeedsLayout()
+
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
 
@@ -105,6 +106,36 @@ extension ItemListViewController: ViewControllerDelegate {
 @available(iOS 14.0, *)
 extension ItemListViewController: UICollectionViewDelegate {
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        let detailItemViewController = DetailItemViewController()
+
+        itemManager.urlsessionProvider.getItem(id: itemManager.items[indexPath.row].id) { result in
+            switch result{
+            case .success(let data):
+                guard let item = try? JSONDecoder().decode(ResponseItem.self, from: data) else { return }
+
+                let detailItemManager = DetailItemManager(item: item, session: URLSessionProvider())
+                detailItemViewController.detailItemManager = detailItemManager
+
+                detailItemViewController.detailItemManager?.downloadImages {
+                    let images = detailItemViewController.detailItemManager!.images
+
+                    DispatchQueue.main.async {
+                        detailItemViewController.detailItemView.setupItemImageView(images: images)
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    detailItemViewController.setupDetailViewLabel()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+
+        navigationController?.pushViewController(detailItemViewController, animated: true)
+    }
 }
 
 // - MARK: UICollecdtionViewDataSource

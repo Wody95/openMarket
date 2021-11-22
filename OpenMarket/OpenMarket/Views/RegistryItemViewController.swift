@@ -26,6 +26,7 @@ class RegistryItemViewController: UIViewController {
     private func configureScrollView() {
         self.view.addSubview(scrollView)
         scrollView.delegate = self
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         scrollView.snp.makeConstraints { view in
             view.top.leading.trailing.bottom.equalTo(self.view.safeAreaLayoutGuide)
@@ -35,6 +36,7 @@ class RegistryItemViewController: UIViewController {
     private func configureContentsView() {
         scrollView.addSubview(contentsView)
         contentsView.delegate = self
+        contentsView.translatesAutoresizingMaskIntoConstraints = false
 
         contentsView.snp.makeConstraints { view in
             view.top.leading.trailing.bottom.equalTo(self.scrollView.contentLayoutGuide)

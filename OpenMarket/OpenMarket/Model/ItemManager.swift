@@ -11,7 +11,6 @@ class ItemManager {
         self.urlsessionProvider = urlsession
     }
 
-    // TODO : failure 에러 처리
     func readItems() {
         guard let delegate = self.delegate else { return }
 

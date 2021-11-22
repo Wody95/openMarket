@@ -15,6 +15,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
 
     private let priceLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "priceLabel"
 
         return label
@@ -22,6 +23,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
 
     private let discountPriceLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = nil
 
         return label
@@ -29,6 +31,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
 
     private let stockLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "stockLabel"
 
         return label
@@ -36,6 +39,7 @@ class ItemCollectionViewListCell: UICollectionViewCell {
 
     private let thumbnailImageView: UIImageView = {
         let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(named: "testImage")
         
         return image

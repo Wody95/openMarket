@@ -83,6 +83,7 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         imagesCollectionView.register(ImageCollectionViewCell.self,
                                      forCellWithReuseIdentifier: ImageCollectionViewCell.identifier)
         imagesCollectionView.contentInset = UIEdgeInsets.init(top: 0, left: 10, bottom: 0, right: 0)
+        imagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
 
         imagesCollectionView.snp.makeConstraints { view in
             view.height.equalTo(100)
@@ -96,6 +97,8 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
 
         titleTextField.placeholder = "제품 이름"
         titleTextField.borderStyle = .line
+        titleTextField.translatesAutoresizingMaskIntoConstraints = false
+
         titleTextField.snp.makeConstraints { field in
             field.top.equalTo(imagesCollectionView.snp.bottom).offset(20)
             field.leading.trailing.equalTo(self).inset(10)
@@ -108,6 +111,8 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         priceTextField.placeholder = "가격"
         priceTextField.borderStyle = .line
         priceTextField.keyboardType = .numberPad
+        priceTextField.translatesAutoresizingMaskIntoConstraints = false
+
         priceTextField.snp.makeConstraints { field in
             field.top.equalTo(titleTextField.snp.bottom).offset(20)
             field.leading.trailing.equalTo(self).inset(10)
@@ -120,6 +125,8 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         discountedPriceTextField.placeholder = "할인가격 (옵션)"
         discountedPriceTextField.borderStyle = .line
         discountedPriceTextField.keyboardType = .numberPad
+        discountedPriceTextField.translatesAutoresizingMaskIntoConstraints = false
+
         discountedPriceTextField.snp.makeConstraints { field in
             field.top.equalTo(priceTextField.snp.bottom).offset(20)
             field.leading.trailing.equalTo(self).inset(10)
@@ -131,6 +138,8 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
 
         currencyTextField.placeholder = "화폐단위(KRW)"
         currencyTextField.borderStyle = .line
+        currencyTextField.translatesAutoresizingMaskIntoConstraints = false
+
         currencyTextField.snp.makeConstraints { field in
             field.top.equalTo(discountedPriceTextField.snp.bottom).offset(20)
             field.leading.trailing.equalTo(self).inset(10)
@@ -143,6 +152,8 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         stockTextField.placeholder = "재고 수량"
         stockTextField.borderStyle = .line
         stockTextField.keyboardType = .numberPad
+        stockTextField.translatesAutoresizingMaskIntoConstraints = false
+
         stockTextField.snp.makeConstraints { field in
             field.top.equalTo(currencyTextField.snp.bottom).offset(20)
             field.leading.trailing.equalTo(self).inset(10)
@@ -159,6 +170,8 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         descriptionsTextView.font = UIFont.preferredFont(forTextStyle: .body)
         descriptionsTextView.isScrollEnabled = false
         descriptionsTextView.layer.borderWidth = 1.0
+        descriptionsTextView.translatesAutoresizingMaskIntoConstraints = false
+
         descriptionsTextView.snp.makeConstraints { view in
             view.top.equalTo(stockTextField.snp.bottom).offset(20)
             view.leading.trailing.equalTo(self).inset(10)
