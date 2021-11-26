@@ -68,7 +68,7 @@ class DetailItemView: UIView {
 
         imagePageControl.snp.makeConstraints {
             $0.centerX.equalTo(self)
-            $0.bottom.equalTo(scrollView.snp.bottom)
+            $0.top.equalTo(scrollView.snp.bottom)
         }
     }
 
@@ -82,7 +82,7 @@ class DetailItemView: UIView {
         titleLabel.text = "타이틀"
 
         titleLabel.snp.makeConstraints { label in
-            label.top.equalTo(scrollView.snp.bottom).offset(10)
+            label.top.equalTo(scrollView.snp.bottom).offset(25)
             label.leading.equalTo(self.safeAreaLayoutGuide).inset(10)
         }
     }
@@ -93,7 +93,7 @@ class DetailItemView: UIView {
         stockLabel.text = "남은 수량 : 100"
 
         stockLabel.snp.makeConstraints { label in
-            label.top.equalTo(scrollView.snp.bottom).offset(10)
+            label.top.equalTo(titleLabel.snp.top)
             label.leading.greaterThanOrEqualTo(titleLabel.snp.trailing).offset(10)
             label.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
         }

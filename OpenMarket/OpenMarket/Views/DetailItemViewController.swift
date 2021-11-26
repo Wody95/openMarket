@@ -2,7 +2,6 @@ import UIKit
 import SnapKit
 
 class DetailItemViewController: UIViewController {
-
     let scrollView = UIScrollView()
     let stackView = UIStackView()
     let detailItemView = DetailItemView()
@@ -11,11 +10,35 @@ class DetailItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .white
+        view.backgroundColor = .white
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
+                                                                 style: .plain,
+                                                                 target: self,
+                                                                 action: #selector(didTapEditButton))
 
         setupScrollView()
         setupStackView()
         setupDetailItemView()
+    }
+
+    @objc func didTapEditButton() {
+        let alert = UIAlertController(title: "수정 및 삭제",
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+
+        let editAlertAction = UIAlertAction(title: "Edit", style: .default) { action in
+            print("EditAlertAction")
+        }
+
+        let deleteAlertAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+            print("DeleteAlertAction")
+        }
+
+        alert.addAction(editAlertAction)
+        alert.addAction(deleteAlertAction)
+
+        present(alert, animated: true, completion: nil)
     }
 
     func setupScrollView() {
