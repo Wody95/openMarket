@@ -6,6 +6,12 @@ enum URLSessionDataTaskError: Error {
     case httpCodeError
     case errorCode300
     case errorCode400
+    case errorCode401
+    case errorCode402
+    case errorCode403
+    case errorCode404
+    case errorCode405
+    case errorCode406
     case errorCode500
     case errorCode501
     case errorCode502

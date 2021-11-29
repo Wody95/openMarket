@@ -6,9 +6,9 @@ class RegistryItemViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentsView = RegistryItemContentsView()
     let registryManager = RegistryManager(urlsession: URLSessionProvider())
+    var delegate: ItemListViewControllerDelegate?
 
     override func viewDidLoad() {
-
         self.view.backgroundColor = .white
         configureNavigationBar()
         configureScrollView()
@@ -47,6 +47,7 @@ class RegistryItemViewController: UIViewController {
 
     @objc func didTapRegistryItem() {
         var item: [String:Any] = [:]
+        let images = self.contentsView.imageManager.imageFiles()
 
         guard let title = contentsView.titleTextField.text,
               let price = contentsView.priceTextField.text,
@@ -89,8 +90,21 @@ class RegistryItemViewController: UIViewController {
                 item["discounted_price"] = discountedPrice
             }
 
+            self.contentsView.indicator.startAnimating()
+
             self.registryManager.registryItem(item: item,
-                                         images: self.contentsView.imageManager.imageFiles())
+                                              images: images) { [weak self] responseItem in
+                sleep(2)
+
+                DispatchQueue.main.async {
+                    self?.contentsView.indicator.stopAnimating()
+
+                    let detailItemViewController = DetailItemViewController()
+                    detailItemViewController.updateItem(item: responseItem)
+                    detailItemViewController.delegate = self?.delegate
+                    self?.navigationController?.pushViewController(detailItemViewController, animated: true)
+                }
+            }
         }
 
         alert.addTextField { text in

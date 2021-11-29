@@ -72,16 +72,19 @@ class ItemListViewController: UIViewController {
 }
 
 // - MARK: ViewControllerDelegate
-protocol ViewControllerDelegate {
+protocol ItemListViewControllerDelegate {
     func reloadCollectionView()
     func didTapViewMode()
     func didTapAddItemButton()
+    func updataItems()
 }
 
 @available(iOS 14.0, *)
-extension ItemListViewController: ViewControllerDelegate {
+extension ItemListViewController: ItemListViewControllerDelegate {
     func reloadCollectionView() {
-        self.collectionView.reloadData()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
 
         if !self.fetchingMore {
             self.fetchingMore = true
@@ -98,7 +101,13 @@ extension ItemListViewController: ViewControllerDelegate {
     }
 
     func didTapAddItemButton() {
-        self.navigationController?.pushViewController(RegistryItemViewController(), animated: false)
+        let registryItemViewController = RegistryItemViewController()
+        registryItemViewController.delegate = self
+        self.navigationController?.pushViewController(registryItemViewController, animated: true)
+    }
+
+    func updataItems() {
+        self.itemManager.updateItems()
     }
 }
 
@@ -107,7 +116,6 @@ extension ItemListViewController: ViewControllerDelegate {
 extension ItemListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
         let detailItemViewController = DetailItemViewController()
 
         itemManager.urlsessionProvider.getItem(id: itemManager.items[indexPath.row].id) { result in
@@ -115,19 +123,8 @@ extension ItemListViewController: UICollectionViewDelegate {
             case .success(let data):
                 guard let item = try? JSONDecoder().decode(ResponseItem.self, from: data) else { return }
 
-                let detailItemManager = DetailItemManager(item: item, session: URLSessionProvider())
-                detailItemViewController.detailItemManager = detailItemManager
-
-                detailItemViewController.detailItemManager?.downloadImages {
-                    let images = detailItemViewController.detailItemManager!.images
-
-                    DispatchQueue.main.async {
-                        detailItemViewController.detailItemView.setupItemImageView(images: images)
-                    }
-                }
-
                 DispatchQueue.main.async {
-                    detailItemViewController.setupDetailViewLabel()
+                    detailItemViewController.updateItem(item: item)
                 }
             case .failure(let error):
                 print(error)

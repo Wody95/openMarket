@@ -8,7 +8,7 @@ class RightSideView: UIView {
     private let addItemImage = UIImage(systemName: "plus")
     private let addItemViewButton = UIButton(type: .system)
 
-    var viewControllerDelegate: ViewControllerDelegate?
+    var viewControllerDelegate: ItemListViewControllerDelegate?
     var itemViewMode: ViewMode = .list
 
     override init(frame: CGRect) {
@@ -27,7 +27,7 @@ class RightSideView: UIView {
 
         viewModeButton.frame = CGRect(x: 10, y: 8, width: 20, height: 20)
         viewModeButton.setImage(gridViewModeImage, for: .normal)
-        viewModeButton.addTarget(self.superview, action: #selector(didTapViewModeButton), for: .touchUpInside)
+        viewModeButton.addTarget(self, action: #selector(didTapViewModeButton), for: .touchUpInside)
     }
 
     private func configureAddItemViewButton() {

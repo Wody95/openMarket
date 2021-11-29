@@ -26,6 +26,7 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
     let stockTextField = UITextField()
     let descriptionsTextView = UITextView()
     let passwordTextField = UITextField()
+    let indicator = UIActivityIndicatorView()
 
     let imagePickerButton: UIButton = UIButton(type: .system)
     var imagePicker: PHPickerViewController = {
@@ -58,6 +59,7 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         configureCurrencyTextField()
         configureStockTextField()
         configureDescriptionsTextView()
+        configureIndicator()
     }
 
     required init?(coder: NSCoder) {
@@ -137,6 +139,7 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         self.addSubview(currencyTextField)
 
         currencyTextField.placeholder = "화폐단위(KRW)"
+        currencyTextField.text = "KRW"
         currencyTextField.borderStyle = .line
         currencyTextField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -176,6 +179,26 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
             view.top.equalTo(stockTextField.snp.bottom).offset(20)
             view.leading.trailing.equalTo(self).inset(10)
         }
+    }
+
+    private func configureIndicator() {
+        self.addSubview(indicator)
+        indicator.hidesWhenStopped = true
+        indicator.isHidden = true
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.style = .large
+
+        indicator.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(self)
+        }
+    }
+
+    func startIndicator() {
+        indicator.startAnimating()
+    }
+
+    func stopIndicator() {
+        indicator.stopAnimating()
     }
 
     @objc func didTapAddImage() {

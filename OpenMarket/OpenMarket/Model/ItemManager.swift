@@ -5,7 +5,7 @@ class ItemManager {
     var items: [Item] = []
     var thumbnailImages: [UIImage?] = []
     var lastPage = 1
-    var delegate: ViewControllerDelegate?
+    var delegate: ItemListViewControllerDelegate?
 
     init(urlsession: URLSessionProvider) {
         self.urlsessionProvider = urlsession
@@ -36,6 +36,14 @@ class ItemManager {
                 print(error)
             }
         }
+    }
+
+    func updateItems() {
+        items = []
+        thumbnailImages = []
+        lastPage = 1
+
+        readItems()
     }
 
     func downloadImage(index: Int) -> UIImage? {

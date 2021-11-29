@@ -18,6 +18,7 @@ class DetailItemView: UIView {
         self.backgroundColor = .white
 
         setupScrollView()
+        setupPageControl()
         setupTitleLabel()
         setupStockLabel()
         setupPriceLabel()
@@ -36,35 +37,39 @@ class DetailItemView: UIView {
         scrollView.showsHorizontalScrollIndicator = false
 
         scrollView.snp.makeConstraints { view in
-            view.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            view.height.equalTo(scrollView.snp.width)
+            view.top.leading.trailing.equalTo(self)
+            view.height.equalTo(self.snp.width)
         }
     }
 
     func setupItemImageView(images: [UIImage?]) {
         for i in 0..<images.count {
-            guard let image = images[i] else { return }
-            let imageView = UIImageView()
-            let xPos = self.frame.width * CGFloat(i)
+            DispatchQueue.main.async {
+                let imageView = UIImageView()
+                imageView.contentMode = .scaleAspectFit
+                let xPos = self.frame.width * CGFloat(i)
 
-            imageView.frame = CGRect(x: xPos, y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height)
-            imageView.image = image
+                imageView.frame = CGRect(x: xPos, y: 0,
+                                         width: self.scrollView.bounds.width,
+                                         height: self.scrollView.bounds.height)
+                imageView.image = images[i]
 
-            scrollView.addSubview(imageView)
-            scrollView.contentSize.width = imageView.frame.width * CGFloat(i+1)
+                self.scrollView.addSubview(imageView)
+                self.scrollView.contentSize.width = imageView.frame.width * CGFloat(i+1)
+            }
         }
 
-        setupPageControl(itemCount: images.count)
+        DispatchQueue.main.async {
+            self.imagePageControl.numberOfPages = images.count
+        }
     }
 
-    func setupPageControl(itemCount: Int) {
+    func setupPageControl() {
         addSubview(imagePageControl)
 
-        imagePageControl.numberOfPages = itemCount
         imagePageControl.currentPageIndicatorTintColor = .darkGray
         imagePageControl.pageIndicatorTintColor = .lightGray
         imagePageControl.hidesForSinglePage = true
-
 
         imagePageControl.snp.makeConstraints {
             $0.centerX.equalTo(self)
@@ -83,7 +88,7 @@ class DetailItemView: UIView {
 
         titleLabel.snp.makeConstraints { label in
             label.top.equalTo(scrollView.snp.bottom).offset(25)
-            label.leading.equalTo(self.safeAreaLayoutGuide).inset(10)
+            label.leading.equalTo(self).inset(10)
         }
     }
 
@@ -95,7 +100,7 @@ class DetailItemView: UIView {
         stockLabel.snp.makeConstraints { label in
             label.top.equalTo(titleLabel.snp.top)
             label.leading.greaterThanOrEqualTo(titleLabel.snp.trailing).offset(10)
-            label.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            label.trailing.equalTo(self).inset(10)
         }
     }
 
@@ -106,7 +111,7 @@ class DetailItemView: UIView {
 
         priceLabel.snp.makeConstraints { label in
             label.top.equalTo(titleLabel.snp.bottom).offset(10)
-            label.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            label.leading.trailing.equalTo(self).inset(10)
         }
     }
 
@@ -117,7 +122,7 @@ class DetailItemView: UIView {
 
         discountPriceLabel.snp.makeConstraints { label in
             label.top.equalTo(priceLabel.snp.bottom)
-            label.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            label.leading.trailing.equalTo(self).inset(10)
         }
     }
 
@@ -138,7 +143,7 @@ class DetailItemView: UIView {
                 label.top.equalTo(discountPriceLabel.snp.bottom).offset(10)
             }
 
-            label.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide).inset(10)
+            label.leading.trailing.bottom.equalTo(self).inset(10)
         }
 
     }

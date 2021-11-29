@@ -18,7 +18,17 @@ class URLSessionProvider {
                 if (300...399).contains(httpResponse.statusCode) {
                     return completionHandler(.failure(.errorCode300))
                 } else if (400...499).contains(httpResponse.statusCode) {
-                    return completionHandler(.failure(.errorCode400))
+                    if httpResponse.statusCode == 400 {
+                        return completionHandler(.failure(.errorCode400))
+                    } else if httpResponse.statusCode == 401 {
+                        return completionHandler(.failure(.errorCode401))
+                    } else if httpResponse.statusCode == 402 {
+                        return completionHandler(.failure(.errorCode402))
+                    } else if httpResponse.statusCode == 403 {
+                        return completionHandler(.failure(.errorCode403))
+                    } else if httpResponse.statusCode == 404 {
+                        return completionHandler(.failure(.errorCode404))
+                    }
                 } else if (500...599).contains(httpResponse.statusCode) {
                     if httpResponse.statusCode == 500 {
                         return completionHandler(.failure(.errorCode500))

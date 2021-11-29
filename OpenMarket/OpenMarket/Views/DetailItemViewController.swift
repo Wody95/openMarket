@@ -6,20 +6,22 @@ class DetailItemViewController: UIViewController {
     let stackView = UIStackView()
     let detailItemView = DetailItemView()
     var detailItemManager: DetailItemManager?
+    var delegate: ItemListViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
-                                                                 style: .plain,
-                                                                 target: self,
-                                                                 action: #selector(didTapEditButton))
+        setupNavigationItem()
 
         setupScrollView()
         setupStackView()
         setupDetailItemView()
+    }
+
+    @objc func closeDetailViewController() {
+        navigationController?.popToRootViewController(animated: true)
+        delegate?.updataItems()
     }
 
     @objc func didTapEditButton() {
@@ -39,6 +41,18 @@ class DetailItemViewController: UIViewController {
         alert.addAction(deleteAlertAction)
 
         present(alert, animated: true, completion: nil)
+    }
+
+    private func setupNavigationItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(didTapEditButton))
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Market",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(closeDetailViewController))
     }
 
     func setupScrollView() {
@@ -72,13 +86,17 @@ class DetailItemViewController: UIViewController {
 
     }
 
-    func setupDetailViewLabel() {
-        if let manager = detailItemManager {
-            detailItemView.setupLabels(item: manager.item)
+    func updateItem(item: ResponseItem) {
+        self.detailItemManager = DetailItemManager(item: item, session: URLSessionProvider())
+
+        self.navigationItem.title = detailItemManager?.item.title
+
+        detailItemView.setupLabels(item: item)
+
+        detailItemManager!.downloadImages {
+            self.detailItemView.setupItemImageView(images: self.detailItemManager!.images)
         }
     }
-
-
 }
 
 extension DetailItemViewController: UIScrollViewDelegate {}
