@@ -78,8 +78,8 @@ class ItemCollectionViewListCell: UICollectionViewCell {
         contentView.addSubview(thumbnailImageView)
 
         thumbnailImageView.snp.makeConstraints { view in
-            view.width.equalTo(60)
-            view.height.equalTo(50)
+            view.width.lessThanOrEqualTo(60)
+            view.height.lessThanOrEqualTo(50)
             view.top.leading.equalTo(self.contentView).inset(5)
             view.bottom.lessThanOrEqualTo(self.contentView).inset(5)
 
