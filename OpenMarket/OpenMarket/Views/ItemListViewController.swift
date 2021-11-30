@@ -157,7 +157,9 @@ extension ItemListViewController: UICollectionViewDataSource {
             cell.setupItem(item: item)
 
             DispatchQueue.main.async {
-                cell.setupThumbnailImage(image: self.itemManager.downloadImage(index: indexPath.row))
+                self.itemManager.downloadImage(index: indexPath.row) { image in
+                    cell.setupThumbnailImage(image: image)
+                }
             }
 
             return cell
@@ -167,7 +169,9 @@ extension ItemListViewController: UICollectionViewDataSource {
             cell.setupItem(item: item)
 
             DispatchQueue.main.async {
-                cell.setupThumbnailImage(image: self.itemManager.downloadImage(index: indexPath.row))
+                self.itemManager.downloadImage(index: indexPath.row) { image in
+                    cell.setupThumbnailImage(image: image)
+                }
             }
 
             return cell

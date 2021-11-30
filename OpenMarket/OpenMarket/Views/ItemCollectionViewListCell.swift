@@ -167,6 +167,8 @@ class ItemCollectionViewListCell: UICollectionViewCell {
     }
 
     func setupThumbnailImage(image: UIImage?) {
-        self.thumbnailImageView.image = image
+        DispatchQueue.main.async {
+            self.thumbnailImageView.image = image
+        }
     }
 }

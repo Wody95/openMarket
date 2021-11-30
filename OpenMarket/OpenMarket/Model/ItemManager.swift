@@ -46,22 +46,25 @@ class ItemManager {
         readItems()
     }
 
-    func downloadImage(index: Int) -> UIImage? {
-        if (self.thumbnailImages[index] != nil) {
-            return self.thumbnailImages[index]
-        } else {
-            let item = self.items[index]
-            var result: UIImage?
+    func downloadImage(index: Int, completion: @escaping (UIImage?) -> Void) {
+        if self.thumbnailImages[index] != nil {
+            completion(self.thumbnailImages[index])
+        }
 
-            if let url = URL(string: item.thumbnails[0]),
-               let data = try? Data(contentsOf: url),
-               let image = UIImage(data: data) {
+        let url = self.items[index].thumbnails[0]
 
-                result = image
+        urlsessionProvider.downloadImage(url: url) { resultData in
+            switch resultData {
+
+            case .success(let data):
+                let image = UIImage(data: data)
                 self.thumbnailImages[index] = image
-            }
+                completion(image)
 
-            return result
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }
+
