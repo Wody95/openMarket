@@ -108,6 +108,10 @@ extension ItemListViewController: ItemListViewControllerDelegate {
 
     func updataItems() {
         self.itemManager.updateItems()
+
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
 

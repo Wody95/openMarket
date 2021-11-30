@@ -45,9 +45,8 @@ class RegistryItemViewController: UIViewController {
         }
     }
 
-    @objc func didTapRegistryItem() {
-        var item: [String:Any] = [:]
-        let images = self.contentsView.imageManager.imageFiles()
+    private func createItem() -> [String : Any]? {
+        var item: [String : Any] = [:]
 
         guard let title = contentsView.titleTextField.text,
               let price = contentsView.priceTextField.text,
@@ -55,19 +54,39 @@ class RegistryItemViewController: UIViewController {
               let currency = contentsView.currencyTextField.text,
               let stock = contentsView.stockTextField.text,
               let descriptions = contentsView.descriptionsTextView.text else {
-            return
+            return nil
         }
 
         if title.isEmpty || price.isEmpty || currency.isEmpty ||
-            stock.isEmpty || descriptions.isEmpty || contentsView.imageManager.imagesCount() == 0{
-            let emptyAlert = UIAlertController(title: "등록에 실패했습니다", message: "입력하지 않은 정보가 있습니다", preferredStyle: .alert)
+            stock.isEmpty || descriptions.isEmpty || contentsView.imageManager.imagesCount() == 0 {
+
+            let emptyAlert = UIAlertController(title: "등록에 실패했습니다",
+                                               message: "입력하지 않은 정보가 있습니다",
+                                               preferredStyle: .alert)
             let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
 
             emptyAlert.addAction(ok)
             present(emptyAlert, animated: true, completion: nil)
 
-            return
+            return nil
         }
+
+        item["title"] = title
+        item["price"] = price
+        item["currency"] = currency
+        item["stock"] = stock
+        item["descriptions"] = descriptions
+
+        if !discountedPrice.isEmpty {
+            item["discounted_price"] = discountedPrice
+        }
+
+        return item
+    }
+
+    @objc func didTapRegistryItem() {
+        guard var item = createItem() else { return }
+        let images = self.contentsView.imageManager.imageFiles()
 
         let alert = UIAlertController(title: "상품 정보 비밀번호를 입력해주세요",
                                       message: nil,
@@ -79,16 +98,7 @@ class RegistryItemViewController: UIViewController {
                 return
             }
 
-            item["title"] = title
-            item["price"] = price
-            item["currency"] = currency
-            item["stock"] = stock
-            item["descriptions"] = descriptions
             item["password"] = password
-
-            if !discountedPrice.isEmpty {
-                item["discounted_price"] = discountedPrice
-            }
 
             self.contentsView.indicator.startAnimating()
 
@@ -102,6 +112,7 @@ class RegistryItemViewController: UIViewController {
                     let detailItemViewController = DetailItemViewController()
                     detailItemViewController.updateItem(item: responseItem)
                     detailItemViewController.delegate = self?.delegate
+                    detailItemViewController.delegate?.updataItems()
                     self?.navigationController?.pushViewController(detailItemViewController, animated: true)
                 }
             }
