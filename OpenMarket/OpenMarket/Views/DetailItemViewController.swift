@@ -1,6 +1,7 @@
 import UIKit
 import SnapKit
 
+@available(iOS 14, *)
 class DetailItemViewController: UIViewController {
     let scrollView = UIScrollView()
     let stackView = UIStackView()
@@ -17,30 +18,6 @@ class DetailItemViewController: UIViewController {
         setupScrollView()
         setupStackView()
         setupDetailItemView()
-    }
-
-    @objc func closeDetailViewController() {
-        navigationController?.popToRootViewController(animated: true)
-        delegate?.updataItems()
-    }
-
-    @objc func didTapEditButton() {
-        let alert = UIAlertController(title: "수정 및 삭제",
-                                      message: nil,
-                                      preferredStyle: .actionSheet)
-
-        let editAlertAction = UIAlertAction(title: "Edit", style: .default) { action in
-            print("EditAlertAction")
-        }
-
-        let deleteAlertAction = UIAlertAction(title: "Delete", style: .destructive) { action in
-            print("DeleteAlertAction")
-        }
-
-        alert.addAction(editAlertAction)
-        alert.addAction(deleteAlertAction)
-
-        present(alert, animated: true, completion: nil)
     }
 
     private func setupNavigationItem() {
@@ -89,14 +66,46 @@ class DetailItemViewController: UIViewController {
     func updateItem(item: ResponseItem) {
         self.detailItemManager = DetailItemManager(item: item, session: URLSessionProvider())
 
-        self.navigationItem.title = detailItemManager?.item.title
-
-        detailItemView.setupLabels(item: item)
+        DispatchQueue.main.async {
+            self.navigationItem.title = self.detailItemManager?.item.title
+            self.detailItemView.setupLabels(item: item)
+        }
 
         detailItemManager!.downloadImages {
             self.detailItemView.setupItemImageView(images: self.detailItemManager!.images)
         }
     }
+
+    @objc func closeDetailViewController() {
+        navigationController?.popToRootViewController(animated: true)
+        delegate?.updataItems()
+    }
+
+    @objc func didTapEditButton() {
+        let alert = UIAlertController(title: "수정 및 삭제",
+                                      message: nil,
+                                      preferredStyle: .actionSheet)
+
+        let editAlertAction = UIAlertAction(title: "Edit", style: .default) { action in
+
+        }
+
+        let deleteAlertAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+
+        }
+
+        alert.addAction(editAlertAction)
+        alert.addAction(deleteAlertAction)
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    func editItem() {
+        self.navigationController?.pushViewController(RegistryItemViewController(), animated: true)
+    }
+
 }
 
+// MARK: - UIScrollViewDelegate
+@available(iOS 14, *)
 extension DetailItemViewController: UIScrollViewDelegate {}

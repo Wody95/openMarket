@@ -60,7 +60,7 @@
 		70548D2926DCCA5B004ED445 /* deleteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteItem.swift; sourceTree = "<group>"; };
 		70548D3726DCCCB1004ED445 /* OpenMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70548D3B26DCCCB1004ED445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		705F3A5F270AA7E100B55756 /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
+		705F3A5F270AA7E100B55756 /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ItemManager.swift; path = ../Model/ItemManager.swift; sourceTree = "<group>"; };
 		706CB335270197410008274C /* URLSessionDataTaskError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskError.swift; sourceTree = "<group>"; };
 		706CB337270197620008274C /* ServerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
 		7078495C2702C8D000343807 /* ResponseItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseItem.swift; sourceTree = "<group>"; };
@@ -174,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				7002922326E8583A00DAC46C /* Network */,
-				705F3A5F270AA7E100B55756 /* ItemManager.swift */,
 				70A3E8032726BC4D00CE1432 /* ImageManager.swift */,
 			);
 			path = Model;
@@ -237,6 +236,7 @@
 		7084C323271FEB5100A851A3 /* ItemListView */ = {
 			isa = PBXGroup;
 			children = (
+				70E425832755FCEB00F28908 /* Model */,
 				70F08A882715940F000D74BC /* Cell */,
 				7084C325271FEB9A00A851A3 /* View */,
 				7084C324271FEB9400A851A3 /* ViewController */,
@@ -310,6 +310,14 @@
 				70548D2926DCCA5B004ED445 /* deleteItem.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		70E425832755FCEB00F28908 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				705F3A5F270AA7E100B55756 /* ItemManager.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		70F08A882715940F000D74BC /* Cell */ = {

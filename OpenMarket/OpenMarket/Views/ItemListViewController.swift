@@ -127,9 +127,7 @@ extension ItemListViewController: UICollectionViewDelegate {
             case .success(let data):
                 guard let item = try? JSONDecoder().decode(ResponseItem.self, from: data) else { return }
 
-                DispatchQueue.main.async {
-                    detailItemViewController.updateItem(item: item)
-                }
+                detailItemViewController.updateItem(item: item)
             case .failure(let error):
                 print(error)
             }

@@ -43,8 +43,9 @@ class DetailItemView: UIView {
     }
 
     func setupItemImageView(images: [UIImage?]) {
-        for i in 0..<images.count {
-            DispatchQueue.main.async {
+
+        DispatchQueue.main.async {
+            for i in 0..<images.count {
                 let imageView = UIImageView()
                 imageView.contentMode = .scaleAspectFit
                 let xPos = self.frame.width * CGFloat(i)

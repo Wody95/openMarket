@@ -20,6 +20,7 @@ class DetailItemManager {
 
     func downloadImages(completionHandler: @escaping () -> Void) {
         let lastIndex = images.count - 1
+        var completionCount = 0
 
         for index in 0...lastIndex {
             let url = item.images[index]
@@ -31,8 +32,9 @@ class DetailItemManager {
                 case .success(let data):
                     let image = UIImage(data: data)
                     self.images[index] = image
+                    completionCount += 1
 
-                    if index == lastIndex {
+                    if completionCount == self.images.count {
                         completionHandler()
                     }
                 case .failure(let error):

@@ -23,6 +23,10 @@ class RegistryItemViewController: UIViewController {
                                                                  action: #selector(didTapRegistryItem))
     }
 
+    func editMode() {
+
+    }
+
     private func configureScrollView() {
         self.view.addSubview(scrollView)
         scrollView.delegate = self
