@@ -1,24 +1,10 @@
 import UIKit
 import PhotosUI
 
-protocol RegistryItemContentsViewDelegate {
-    func didTapAddImages()
-}
 
-@available(iOS 14, *)
-extension RegistryItemContentsView: RegistryItemContentsViewDelegate {
-    func didTapAddImages() {
-        guard let delegate = self.delegate else {
-            return
-        }
-
-        delegate.didTapAddImageButton(viewController: self.imagePicker)
-    }
-}
 
 @available(iOS 14, *)
 class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
-
     let titleTextField = UITextField()
     let priceTextField = UITextField()
     let discountedPriceTextField = UITextField()
@@ -201,10 +187,39 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         indicator.stopAnimating()
     }
 
+    func setupPatchItem(item: ResponseItem) {
+        titleTextField.text = item.title
+        priceTextField.text = "\(item.price)"
+        currencyTextField.text = item.currency
+        stockTextField.text = "\(item.stock)"
+        descriptionsTextView.text = item.descriptions
+        descriptionsTextView.textColor = .black
+
+        if let discountPrice = item.discountedPrice {
+            discountedPriceTextField.text = "\(discountPrice)"
+        }
+    }
+
     @objc func didTapAddImage() {
         guard let delegate = self.delegate else { return }
 
         delegate.didTapAddImageButton(viewController: imagePicker)
+    }
+}
+
+// MARK: - RegistryItemContentsViewDelegate
+protocol RegistryItemContentsViewDelegate {
+    func didTapAddImages()
+}
+
+@available(iOS 14, *)
+extension RegistryItemContentsView: RegistryItemContentsViewDelegate {
+    func didTapAddImages() {
+        guard let delegate = self.delegate else {
+            return
+        }
+
+        delegate.didTapAddImageButton(viewController: self.imagePicker)
     }
 }
 

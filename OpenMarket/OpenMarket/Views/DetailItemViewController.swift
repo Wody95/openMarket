@@ -78,7 +78,6 @@ class DetailItemViewController: UIViewController {
 
     @objc func closeDetailViewController() {
         navigationController?.popToRootViewController(animated: true)
-        delegate?.updataItems()
     }
 
     @objc func didTapEditButton() {
@@ -87,7 +86,7 @@ class DetailItemViewController: UIViewController {
                                       preferredStyle: .actionSheet)
 
         let editAlertAction = UIAlertAction(title: "Edit", style: .default) { action in
-
+            self.editItem()
         }
 
         let deleteAlertAction = UIAlertAction(title: "Delete", style: .destructive) { action in
@@ -101,7 +100,17 @@ class DetailItemViewController: UIViewController {
     }
 
     func editItem() {
-        self.navigationController?.pushViewController(RegistryItemViewController(), animated: true)
+        let registryAndPatchItemViewController = RegistryItemViewController()
+        registryAndPatchItemViewController.mode = .patch
+        registryAndPatchItemViewController.delegate = self.delegate
+        registryAndPatchItemViewController.editMode(item: self.detailItemManager!.item)
+
+        self.navigationController?.pushViewController(registryAndPatchItemViewController, animated: true)
+
+    }
+
+    func deleteItem() {
+        
     }
 
 }

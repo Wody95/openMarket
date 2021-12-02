@@ -1,12 +1,17 @@
 import UIKit
 import SnapKit
 
+enum RegistryAndPatchMode {
+    case registry, patch
+}
+
 @available(iOS 14, *)
 class RegistryItemViewController: UIViewController {
     let scrollView = UIScrollView()
     let contentsView = RegistryItemContentsView()
-    let registryManager = RegistryManager(urlsession: URLSessionProvider())
+    let registryManager = RegistryAndPatchManager(urlsession: URLSessionProvider())
     var delegate: ItemListViewControllerDelegate?
+    var mode: RegistryAndPatchMode = .registry
 
     override func viewDidLoad() {
         self.view.backgroundColor = .white
@@ -16,15 +21,28 @@ class RegistryItemViewController: UIViewController {
     }
 
     private func configureNavigationBar() {
-        self.navigationItem.title = "상품등록"
+        if mode == .registry {
+            self.navigationItem.title = "상품등록"
+        } else {
+            self.navigationController?.title = "\(self.registryManager.patchItem?.title) 수정"
+        }
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "등록",
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(didTapRegistryItem))
+
+
     }
 
-    func editMode() {
+    func editMode(item: ResponseItem) {
+        self.mode = .patch
+        self.registryManager.patchItem = item
+        self.navigationItem.title = "\(item.title) Edit"
 
+        DispatchQueue.main.async {
+            self.contentsView.setupPatchItem(item: item)
+        }
     }
 
     private func configureScrollView() {
@@ -106,20 +124,14 @@ class RegistryItemViewController: UIViewController {
 
             self.contentsView.indicator.startAnimating()
 
-            self.registryManager.registryItem(item: item,
-                                              images: images) { [weak self] responseItem in
-                sleep(2)
+            switch self.mode {
 
-                DispatchQueue.main.async {
-                    self?.contentsView.indicator.stopAnimating()
-
-                    let detailItemViewController = DetailItemViewController()
-                    detailItemViewController.updateItem(item: responseItem)
-                    detailItemViewController.delegate = self?.delegate
-                    detailItemViewController.delegate?.updataItems()
-                    self?.navigationController?.pushViewController(detailItemViewController, animated: true)
-                }
+            case .registry:
+                self.registryItem(item: item, images: images)
+            case .patch:
+                self.patchItem(item: item, images: images)
             }
+
         }
 
         alert.addTextField { text in
@@ -129,6 +141,42 @@ class RegistryItemViewController: UIViewController {
         alert.addAction(cancel)
 
         present(alert, animated: true, completion: nil)
+    }
+
+    func registryItem(item: [String:Any], images: [ImageFile]) {
+        self.registryManager.registryItem(item: item,
+                                          images: images) { [weak self] responseItem in
+            sleep(2)
+
+            DispatchQueue.main.async {
+                self?.contentsView.indicator.stopAnimating()
+
+                let detailItemViewController = DetailItemViewController()
+                detailItemViewController.updateItem(item: responseItem)
+                detailItemViewController.delegate = self?.delegate
+
+                self?.navigationController?.pushViewController(detailItemViewController, animated: true)
+
+                self?.delegate?.updataItems()
+            }
+        }
+    }
+
+    func patchItem(item: [String: Any], images: [ImageFile]) {
+        self.registryManager.patchItem(item: item, images: images) { [weak self] responseItem in
+            sleep(2)
+
+
+            DispatchQueue.main.async {
+                self?.contentsView.indicator.stopAnimating()
+
+                let detailItemViewController = DetailItemViewController()
+                detailItemViewController.updateItem(item: responseItem)
+                self?.navigationController?.pushViewController(detailItemViewController, animated: true)
+
+                self?.delegate?.updataItems()
+            }
+        }
     }
 }
 

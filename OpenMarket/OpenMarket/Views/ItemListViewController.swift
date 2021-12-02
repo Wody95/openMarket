@@ -107,9 +107,9 @@ extension ItemListViewController: ItemListViewControllerDelegate {
     }
 
     func updataItems() {
-        self.itemManager.updateItems()
-
         DispatchQueue.main.async {
+            self.collectionView.scrollToTop()
+            self.itemManager.updateItems()
             self.collectionView.reloadData()
         }
     }
@@ -121,6 +121,7 @@ extension ItemListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailItemViewController = DetailItemViewController()
+        detailItemViewController.delegate = self
 
         itemManager.urlsessionProvider.getItem(id: itemManager.items[indexPath.row].id) { result in
             switch result{
