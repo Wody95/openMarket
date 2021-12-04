@@ -16,6 +16,7 @@
 		70548D2A26DCCA5B004ED445 /* deleteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70548D2926DCCA5B004ED445 /* deleteItem.swift */; };
 		705F3A60270AA7E100B55756 /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705F3A5F270AA7E100B55756 /* ItemManager.swift */; };
 		705F3A63270AC54000B55756 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 705F3A62270AC54000B55756 /* SnapKit */; };
+		7063A7E32759B1D800D76468 /* DetailViewAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7063A7E22759B1D800D76468 /* DetailViewAlert.swift */; };
 		706CB336270197410008274C /* URLSessionDataTaskError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706CB335270197410008274C /* URLSessionDataTaskError.swift */; };
 		706CB338270197620008274C /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706CB337270197620008274C /* ServerAPI.swift */; };
 		7078495D2702C8D000343807 /* ResponseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7078495C2702C8D000343807 /* ResponseItem.swift */; };
@@ -61,6 +62,7 @@
 		70548D3726DCCCB1004ED445 /* OpenMarketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenMarketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70548D3B26DCCCB1004ED445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		705F3A5F270AA7E100B55756 /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ItemManager.swift; path = ../Model/ItemManager.swift; sourceTree = "<group>"; };
+		7063A7E22759B1D800D76468 /* DetailViewAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewAlert.swift; sourceTree = "<group>"; };
 		706CB335270197410008274C /* URLSessionDataTaskError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskError.swift; sourceTree = "<group>"; };
 		706CB337270197620008274C /* ServerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
 		7078495C2702C8D000343807 /* ResponseItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseItem.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				703328D72734C41000196B76 /* DetailItemView.swift */,
+				7063A7E22759B1D800D76468 /* DetailViewAlert.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				70D05F9B270BE76200466B0A /* ViewMode.swift in Sources */,
 				70AAEAC826E0C78800C631B0 /* URLSessionProvider.swift in Sources */,
 				703328D82734C41000196B76 /* DetailItemView.swift in Sources */,
+				7063A7E32759B1D800D76468 /* DetailViewAlert.swift in Sources */,
 				70F08A8B2715C2C4000D74BC /* NSMutableAttributedString.swift in Sources */,
 				70548D2A26DCCA5B004ED445 /* deleteItem.swift in Sources */,
 				70943747270AE4B300244386 /* ItemCollectionView.swift in Sources */,

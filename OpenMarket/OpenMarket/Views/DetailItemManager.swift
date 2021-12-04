@@ -44,4 +44,19 @@ class DetailItemManager {
         }
     }
 
+    func deleteItem(password: String, completion: @escaping (Result<ResponseItem, URLSessionDataTaskError>) -> Void) {
+        session.deleteItem(id: self.item.id, password: password) { result in
+            switch result {
+
+            case .success(let data):
+                guard let response = try? JSONDecoder().decode(ResponseItem.self, from: data) else { return }
+                completion(.success(response))
+
+            case .failure(let error):
+                print("deleteItem error: \(error)")
+                completion(.failure(error))
+            }
+        }
+    }
+
 }

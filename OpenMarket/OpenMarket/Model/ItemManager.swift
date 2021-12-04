@@ -11,7 +11,7 @@ class ItemManager {
         self.urlsessionProvider = urlsession
     }
 
-    func readItems() {
+    func readItems(completion: (() -> Void)? = nil) {
         guard let delegate = self.delegate else { return }
 
         urlsessionProvider.getItems(page: self.lastPage) { [weak self] result in
@@ -30,6 +30,7 @@ class ItemManager {
 
                 DispatchQueue.main.async {
                     delegate.reloadCollectionView()
+                    completion?()
                 }
 
             case .failure(let error):
@@ -38,12 +39,12 @@ class ItemManager {
         }
     }
 
-    func updateItems() {
+    func updateItems(completion: @escaping () -> Void) {
         items = []
         thumbnailImages = []
         lastPage = 1
 
-        readItems()
+        readItems(completion: completion)
     }
 
     func downloadImage(index: Int, completion: @escaping (UIImage?) -> Void) {

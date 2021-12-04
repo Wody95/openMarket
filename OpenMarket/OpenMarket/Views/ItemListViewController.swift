@@ -55,7 +55,7 @@ class ItemListViewController: UIViewController {
     private func setupItemManager() {
         itemManager.delegate = self
         if itemManager.items.count == 0 {
-            self.itemManager.readItems()
+            self.itemManager.readItems(completion: nil)
         }
     }
 
@@ -65,7 +65,7 @@ class ItemListViewController: UIViewController {
             if fetchingMore {
                 fetchingMore = false
 
-                self.itemManager.readItems()
+                self.itemManager.readItems(completion: nil)
             }
         }
     }
@@ -76,7 +76,7 @@ protocol ItemListViewControllerDelegate {
     func reloadCollectionView()
     func didTapViewMode()
     func didTapAddItemButton()
-    func updataItems()
+    func updataItems(completion: (() -> Void)?)
 }
 
 @available(iOS 14.0, *)
@@ -106,11 +106,13 @@ extension ItemListViewController: ItemListViewControllerDelegate {
         self.navigationController?.pushViewController(registryItemViewController, animated: true)
     }
 
-    func updataItems() {
+    func updataItems(completion: (()-> Void)? = nil) {
         DispatchQueue.main.async {
             self.collectionView.scrollToTop()
-            self.itemManager.updateItems()
-            self.collectionView.reloadData()
+            self.itemManager.updateItems {
+                self.collectionView.reloadData()
+                completion?()
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ class RegistryItemViewController: UIViewController {
         if mode == .registry {
             self.navigationItem.title = "상품등록"
         } else {
-            self.navigationController?.title = "\(self.registryManager.patchItem?.title) 수정"
+            self.navigationController?.title = "\(String(describing: self.registryManager.patchItem?.title)) 수정"
         }
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "등록",
@@ -157,7 +157,7 @@ class RegistryItemViewController: UIViewController {
 
                 self?.navigationController?.pushViewController(detailItemViewController, animated: true)
 
-                self?.delegate?.updataItems()
+                self?.delegate?.updataItems(completion: nil)
             }
         }
     }
@@ -174,7 +174,7 @@ class RegistryItemViewController: UIViewController {
                 detailItemViewController.updateItem(item: responseItem)
                 self?.navigationController?.pushViewController(detailItemViewController, animated: true)
 
-                self?.delegate?.updataItems()
+                self?.delegate?.updataItems(completion: nil)
             }
         }
     }

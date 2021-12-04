@@ -24,7 +24,7 @@ class DetailItemViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit",
                                                             style: .plain,
                                                             target: self,
-                                                            action: #selector(didTapEditButton))
+                                                            action: #selector(DidTapEditButton))
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Market",
                                                            style: .plain,
@@ -60,7 +60,6 @@ class DetailItemViewController: UIViewController {
 
     func setupDetailItemView() {
         stackView.addArrangedSubview(detailItemView)
-
     }
 
     func updateItem(item: ResponseItem) {
@@ -80,23 +79,12 @@ class DetailItemViewController: UIViewController {
         navigationController?.popToRootViewController(animated: true)
     }
 
-    @objc func didTapEditButton() {
-        let alert = UIAlertController(title: "수정 및 삭제",
-                                      message: nil,
-                                      preferredStyle: .actionSheet)
-
-        let editAlertAction = UIAlertAction(title: "Edit", style: .default) { action in
+    @objc func DidTapEditButton() {
+        Alerts.shared.editAndDeleteAlert(present: self) {
             self.editItem()
+        } deleteHandler: {
+            self.deleteItem()
         }
-
-        let deleteAlertAction = UIAlertAction(title: "Delete", style: .destructive) { action in
-
-        }
-
-        alert.addAction(editAlertAction)
-        alert.addAction(deleteAlertAction)
-
-        present(alert, animated: true, completion: nil)
     }
 
     func editItem() {
@@ -110,7 +98,23 @@ class DetailItemViewController: UIViewController {
     }
 
     func deleteItem() {
-        
+        Alerts.shared.deletePasswordAlert(present: self) { password in
+            self.detailItemManager?.deleteItem(password: password) { result in
+                switch result {
+
+                case .success(_):
+                    Alerts.shared.completeDeleteAlert(present: self) {
+                        self.delegate?.updataItems() {
+                            DispatchQueue.main.async {
+                                self.navigationController?.popToRootViewController(animated: true)
+                            }
+                        }
+                    }
+                case .failure(_):
+                    Alerts.shared.failPassword(present: self)
+                }
+            }
+        }
     }
 
 }
