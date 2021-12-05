@@ -5,6 +5,40 @@ class Alerts {
 
     private let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
 
+    // MARK: - RegistrtItemViewController use Alert
+    func setupPasswordAlert(present viewController: UIViewController,
+                            passwordHandler: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: "상품 정보 비밀번호를 입력해주세요",
+                                      message: nil,
+                                      preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let ok = UIAlertAction(title: "등록하기", style: .default) { action in
+            guard let textField = alert.textFields,
+                  let password = textField[0].text else { return }
+            passwordHandler(password)
+        }
+
+        alert.addTextField { text in
+            text.placeholder = "비밀번호를 입력해주세요"
+        }
+        alert.addAction(ok)
+        alert.addAction(cancel)
+
+        viewController.present(alert, animated: true, completion: nil)
+    }
+
+    func emptyTextAlert(present viewController: UIViewController) {
+        let emptyAlert = UIAlertController(title: "등록에 실패했습니다",
+                                           message: "입력하지 않은 정보가 있습니다",
+                                           preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+
+        emptyAlert.addAction(ok)
+
+        viewController.present(emptyAlert, animated: true, completion: nil)
+    }
+
+    // MARK: - DetailViewController use Alert
     func editAndDeleteAlert(present viewController: UIViewController,
                             editHandler: @escaping (() -> Void),
                             deleteHandler: @escaping (() -> Void)) {
@@ -113,6 +147,8 @@ class Alerts {
         let alert = UIAlertController(title: "비밀번호가 틀렸습니다", message: "다시 한번 확인해주세요", preferredStyle: .alert)
 
         let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+
+        alert.addAction(okAction)
 
         DispatchQueue.main.async {
             viewController.present(alert, animated: true, completion: nil)

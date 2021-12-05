@@ -81,14 +81,7 @@ class RegistryItemViewController: UIViewController {
 
         if title.isEmpty || price.isEmpty || currency.isEmpty ||
             stock.isEmpty || descriptions.isEmpty || contentsView.imageManager.imagesCount() == 0 {
-
-            let emptyAlert = UIAlertController(title: "등록에 실패했습니다",
-                                               message: "입력하지 않은 정보가 있습니다",
-                                               preferredStyle: .alert)
-            let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
-
-            emptyAlert.addAction(ok)
-            present(emptyAlert, animated: true, completion: nil)
+            Alerts.shared.emptyTextAlert(present: self)
 
             return nil
         }
@@ -110,16 +103,7 @@ class RegistryItemViewController: UIViewController {
         guard var item = createItem() else { return }
         let images = self.contentsView.imageManager.imageFiles()
 
-        let alert = UIAlertController(title: "상품 정보 비밀번호를 입력해주세요",
-                                      message: nil,
-                                      preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        let ok = UIAlertAction(title: "등록하기", style: .default) { [weak self] _ in
-            guard let password = alert.textFields?[0].text,
-                  let self = self else {
-                return
-            }
-
+        Alerts.shared.setupPasswordAlert(present: self) { password in
             item["password"] = password
 
             self.contentsView.indicator.startAnimating()
@@ -131,16 +115,7 @@ class RegistryItemViewController: UIViewController {
             case .patch:
                 self.patchItem(item: item, images: images)
             }
-
         }
-
-        alert.addTextField { text in
-            text.placeholder = "비밀번호를 입력해주세요"
-        }
-        alert.addAction(ok)
-        alert.addAction(cancel)
-
-        present(alert, animated: true, completion: nil)
     }
 
     func registryItem(item: [String:Any], images: [ImageFile]) {
