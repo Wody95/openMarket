@@ -5,30 +5,29 @@ Rest API를 이용해 서버와 통신하고 상품을 관리하는 어플리케
 
 # 목차
 
-## [1. 프로젝트 개요](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94)
-- [1-1. 프로젝트 관리](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-1-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B4%80%EB%A6%AC)
-- [1-2. MVC](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-2-mvc)
-- [1-3. 오토레이아웃 구성](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-3-%EC%98%A4%ED%86%A0%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83-%EA%B5%AC%EC%84%B1)
-- [1-4. 기술 스택](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-3-%EC%98%A4%ED%86%A0%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83-%EA%B5%AC%EC%84%B1)
- 
-## [2. 기능](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-%EA%B8%B0%EB%8A%A5)
-- [2-1. 목록 보기 모드](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-1-%EB%AA%A9%EB%A1%9D-%EB%B3%B4%EA%B8%B0-%EB%AA%A8%EB%93%9C-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D)
-- [2-2. 목록 조회](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-2-%EB%AA%A9%EB%A1%9D-%EC%A1%B0%ED%9A%8C-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D)
-- [2-3. 상세 조회](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-3-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C)
-- [2-4. 상품 등록](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-4-%EB%93%B1%EB%A1%9D)
-- [2-5. 상품 수정](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-5-%EC%88%98%EC%A0%95)
-- [2-6. 상품 삭제](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-6-%EC%82%AD%EC%A0%9C)
-
-## [3. 설계](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-%EC%84%A4%EA%B3%84)
-- [3-1. 상품 목록 조회 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-1-%EC%83%81%ED%92%88-%EB%AA%A9%EB%A1%9D-%EC%A1%B0%ED%9A%8C-%EA%B5%AC%ED%98%84)
-- [3-2. 상품 상세 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-2-%EC%83%81%ED%92%88-%EC%83%81%EC%84%B8-%EA%B5%AC%ED%98%84)
-- [3-3. 상품 등록 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-3-%EC%83%81%ED%92%88-%EB%93%B1%EB%A1%9D-%EA%B5%AC%ED%98%84)
-- [3-4. 상품 수정 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-4-%EC%83%81%ED%92%88-%EC%88%98%EC%A0%95-%EA%B5%AC%ED%98%84)
-- [3-5. 상품 삭제 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-5-%EC%83%81%ED%92%88-%EC%82%AD%EC%A0%9C-%EA%B5%AC%ED%98%84)
-
-## [4. 유닛 테스트](https://github.com/Wody95/openMarket/blob/openMarket/README.md#4-%EC%9C%A0%EB%8B%9B%ED%85%8C%EC%8A%A4%ED%8A%B8)
-
-## [5. 트러블 슈팅](https://github.com/Wody95/openMarket/blob/openMarket/README.md#5-%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
+- [1. 프로젝트 개요](#1-프로젝트-개요)
+  * [1-1. 프로젝트 관리](#1-1-프로젝트-관리)
+  * [1-2. MVC](#1-2-mvc)
+  * [1-3. 오토레이아웃 구성](#1-3-오토레이아웃-구성)
+  * [1-4. 기술 스택](#1-4-기술-스택)
+- [2. 기능](#2-기능)
+  * [2-1. 목록 보기 모드](#2-1-목록-보기-모드)
+  * [2-2. 목록 조회](#2-2-목록-조회)
+  * [2-3. 상세 조회](#2-3-상세-조회)
+  * [2-4. 상품 등록](#2-4-상품-등록)
+  * [2-5. 상품 수정](#2-5-상품-수정)
+  * [2-6. 상품 삭제](#2-6-상품-삭제)
+- [3. 설계](#3-설계)
+  * [3-1. 상품 목록 조회 구현](#3-1-상품-목록-조회-구현)
+  * [3-2. 상품 상세 구현](#3-2-상품-상세-구현)
+  * [3-3. 상품 등록 구현](#3-3-상품-등록-구현)
+  * [TextView의 PlaceHolder 구현](#textview의-placeholder-구현)
+  * [등록 완료까지의 사용자 경험 향상을 위한 인디케이터 활용](#등록-완료까지의-사용자-경험-향상을-위한-인디케이터-활용)
+  * [3-4. 상품 수정 구현](#3-4-상품-수정-구현)
+  * [3-5. 상품 삭제 구현](#3-5-상품-삭제-구현)
+- [4. 유닛 테스트](#4-유닛-테스트)
+  * [유닛테스트를 왜 해야 하고 해보는 경험이 중요한가?](#유닛테스트를-왜-해야-하고-해보는-경험이-중요한가?)
+- [5. 트러블 슈팅](#5-트러블-슈팅)
  
  
 ## 1. 프로젝트 개요
@@ -51,19 +50,16 @@ GitHub Issues를 통한 프로젝트의 목표와 각 커밋의 해당 목표 �
 
 ### 1-4. 기술 스택
 
-| 카테고리 | 기술 스택 |
-| --- | --- |
-| UI | UIKit
-SnapKit |
-| Network | URLSession |
-| DataParsing | Encodabel / Decodable
-JSONEncoder / JSONDecoder
-multipart/form-data |
+| 카테고리      | 기술 스택                |
+| ----------- | ---------------------- |
+| UI          | UIKit / SnapKit        |
+| Network     | URLSession             |
+| DataParsing | Encodabel / Decodable<br> JSONEncoder / JSONDecoder<br> multipart/form-data |
 | Test | XCTest |
 
 ## 2. 기능
 
-### 2-1. 목록 보기 모드 (구현 방식)
+### 2-1. 목록 보기 모드
 
 상품 목록을 보는 모드는 2가지를 지원합니다.  리스트 형식으로 보여주는 모드와 그리드 형식으로 보여주는 그리드 모드입니다.
 
@@ -73,7 +69,7 @@ multipart/form-data |
 ![보기모드](https://user-images.githubusercontent.com/44163277/144873108-2d77ddba-cf1f-46ea-9cc4-d86ab89eb0bc.gif)
 
 
-### 2-2. 목록 조회 (구현 방식)
+### 2-2. 목록 조회
 
 앱이 실행되고 `ItemManager` 에 상품 목록 데이터가 없을 경우 서버에 요청하여 상품 목록 데이터를 가져오는 기능입니다. 상품 목록의 스크롤이 특정지점에 도달할 때 다음 페이지의 상품 목록 데이터를 비동기적으로 요청하여 끊김없는 스크롤을 구현했습니다. 
 ![리스트화면무한스크롤](https://user-images.githubusercontent.com/44163277/144873325-d15efc73-e2f4-496d-9936-a75c0a6e7246.gif)![그리드화면무한스크롤](https://user-images.githubusercontent.com/44163277/144873348-03b2ef73-1de6-42c8-921c-d9fc297b46a5.gif)
