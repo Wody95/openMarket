@@ -3,9 +3,9 @@ import SnapKit
 
 @available(iOS 14.0, *)
 class ItemListViewController: UIViewController {
-    let itemManager = ItemManager(urlsession: URLSessionProvider())
-    let rightSideView = RightSideView(frame: CGRect(x: 0, y: 0, width: 70, height: 37))
-    var collectionView = ItemCollectionView(frame: .zero,
+    private let itemManager = ItemManager(urlsession: URLSessionProvider())
+    private let rightSideView = RightSideView(frame: CGRect(x: 0, y: 0, width: 70, height: 37))
+    private var collectionView = ItemCollectionView(frame: .zero,
                                             collectionViewLayout: UICollectionViewFlowLayout())
     var fetchingMore = true
 

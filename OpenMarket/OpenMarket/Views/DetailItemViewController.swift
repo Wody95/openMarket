@@ -3,10 +3,10 @@ import SnapKit
 
 @available(iOS 14, *)
 class DetailItemViewController: UIViewController {
-    let scrollView = UIScrollView()
-    let stackView = UIStackView()
-    let detailItemView = DetailItemView()
-    var detailItemManager: DetailItemManager?
+    private let scrollView = UIScrollView()
+    private let stackView = UIStackView()
+    private let detailItemView = DetailItemView()
+    private var detailItemManager: DetailItemManager?
     var delegate: ItemListViewControllerDelegate?
 
     override func viewDidLoad() {

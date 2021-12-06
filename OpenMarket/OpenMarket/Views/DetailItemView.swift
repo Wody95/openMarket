@@ -131,11 +131,7 @@ class DetailItemView: UIView {
         addSubview(descriptionsLabel)
 
         descriptionsLabel.numberOfLines = 0
-        descriptionsLabel.text = """
-                                여러줄 제품
-                                설명입니다
-                                어떤가요?
-                                """
+        descriptionsLabel.text = "제품 설명입니다"
 
         descriptionsLabel.snp.makeConstraints { label in
             if discountPriceLabel.text == nil {

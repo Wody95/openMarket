@@ -200,6 +200,39 @@ class RegistryItemContentsView: UIView, UINavigationControllerDelegate {
         }
     }
 
+    func createItem() -> [String : Any]? {
+        var item: [String : Any] = [:]
+
+        guard let title = titleTextField.text,
+              let price = priceTextField.text,
+              let discountedPrice = discountedPriceTextField.text,
+              let currency = currencyTextField.text,
+              let stock = stockTextField.text,
+              let descriptions = descriptionsTextView.text else {
+            return nil
+        }
+
+        if title.isEmpty || price.isEmpty || currency.isEmpty ||
+            stock.isEmpty || descriptions.isEmpty || imageManager.imagesCount() == 0 {
+
+            delegate?.emptyTextField()
+
+            return nil
+        }
+
+        item["title"] = title
+        item["price"] = price
+        item["currency"] = currency
+        item["stock"] = stock
+        item["descriptions"] = descriptions
+
+        if !discountedPrice.isEmpty {
+            item["discounted_price"] = discountedPrice
+        }
+
+        return item
+    }
+
     @objc func didTapAddImage() {
         guard let delegate = self.delegate else { return }
 

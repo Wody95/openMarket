@@ -7,9 +7,9 @@ enum RegistryAndPatchMode {
 
 @available(iOS 14, *)
 class RegistryItemViewController: UIViewController {
-    let scrollView = UIScrollView()
-    let contentsView = RegistryItemContentsView()
-    let registryManager = RegistryAndPatchManager(urlsession: URLSessionProvider())
+    private let scrollView = UIScrollView()
+    private let contentsView = RegistryItemContentsView()
+    private let registryManager = RegistryAndPatchManager(urlsession: URLSessionProvider())
     var delegate: ItemListViewControllerDelegate?
     var mode: RegistryAndPatchMode = .registry
 
@@ -31,8 +31,6 @@ class RegistryItemViewController: UIViewController {
                                                                  style: .done,
                                                                  target: self,
                                                                  action: #selector(didTapRegistryItem))
-
-
     }
 
     func editMode(item: ResponseItem) {
@@ -67,40 +65,8 @@ class RegistryItemViewController: UIViewController {
         }
     }
 
-    private func createItem() -> [String : Any]? {
-        var item: [String : Any] = [:]
-
-        guard let title = contentsView.titleTextField.text,
-              let price = contentsView.priceTextField.text,
-              let discountedPrice = contentsView.discountedPriceTextField.text,
-              let currency = contentsView.currencyTextField.text,
-              let stock = contentsView.stockTextField.text,
-              let descriptions = contentsView.descriptionsTextView.text else {
-            return nil
-        }
-
-        if title.isEmpty || price.isEmpty || currency.isEmpty ||
-            stock.isEmpty || descriptions.isEmpty || contentsView.imageManager.imagesCount() == 0 {
-            Alerts.shared.emptyTextAlert(present: self)
-
-            return nil
-        }
-
-        item["title"] = title
-        item["price"] = price
-        item["currency"] = currency
-        item["stock"] = stock
-        item["descriptions"] = descriptions
-
-        if !discountedPrice.isEmpty {
-            item["discounted_price"] = discountedPrice
-        }
-
-        return item
-    }
-
     @objc func didTapRegistryItem() {
-        guard var item = createItem() else { return }
+        guard var item = contentsView.createItem() else { return }
         let images = self.contentsView.imageManager.imageFiles()
 
         Alerts.shared.setupPasswordAlert(present: self) { password in
@@ -158,12 +124,17 @@ class RegistryItemViewController: UIViewController {
 // MARK: - Protocol RegistryItemViewControllerDelegate
 protocol RegistryItemViewControllerDelegate {
     func didTapAddImageButton(viewController: UIViewController)
+    func emptyTextField()
 }
 
 @available(iOS 14, *)
 extension RegistryItemViewController: RegistryItemViewControllerDelegate {
     func didTapAddImageButton(viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
+    }
+
+    func emptyTextField() {
+        Alerts.shared.emptyTextAlert(present: self)
     }
 
 }
