@@ -5,6 +5,32 @@ Rest API를 이용해 서버와 통신하고 상품을 관리하는 어플리케
 
 # 목차
 
+## [1. 프로젝트 개요](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94)
+- [1-1. 프로젝트 관리](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-1-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B4%80%EB%A6%AC)
+- [1-2. MVC](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-2-mvc)
+- [1-3. 오토레이아웃 구성](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-3-%EC%98%A4%ED%86%A0%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83-%EA%B5%AC%EC%84%B1)
+- [1-4. 기술 스택](https://github.com/Wody95/openMarket/blob/openMarket/README.md#1-3-%EC%98%A4%ED%86%A0%EB%A0%88%EC%9D%B4%EC%95%84%EC%9B%83-%EA%B5%AC%EC%84%B1)
+ 
+## [2. 기능](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-%EA%B8%B0%EB%8A%A5)
+- [2-1. 목록 보기 모드](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-1-%EB%AA%A9%EB%A1%9D-%EB%B3%B4%EA%B8%B0-%EB%AA%A8%EB%93%9C-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D)
+- [2-2. 목록 조회](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-2-%EB%AA%A9%EB%A1%9D-%EC%A1%B0%ED%9A%8C-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D)
+- [2-3. 상세 조회](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-3-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C)
+- [2-4. 상품 등록](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-4-%EB%93%B1%EB%A1%9D)
+- [2-5. 상품 수정](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-5-%EC%88%98%EC%A0%95)
+- [2-6. 상품 삭제](https://github.com/Wody95/openMarket/blob/openMarket/README.md#2-6-%EC%82%AD%EC%A0%9C)
+
+## [3. 설계](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-%EC%84%A4%EA%B3%84)
+- [3-1. 상품 목록 조회 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-1-%EC%83%81%ED%92%88-%EB%AA%A9%EB%A1%9D-%EC%A1%B0%ED%9A%8C-%EA%B5%AC%ED%98%84)
+- [3-2. 상품 상세 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-2-%EC%83%81%ED%92%88-%EC%83%81%EC%84%B8-%EA%B5%AC%ED%98%84)
+- [3-3. 상품 등록 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-3-%EC%83%81%ED%92%88-%EB%93%B1%EB%A1%9D-%EA%B5%AC%ED%98%84)
+- [3-4. 상품 수정 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-4-%EC%83%81%ED%92%88-%EC%88%98%EC%A0%95-%EA%B5%AC%ED%98%84)
+- [3-5. 상품 삭제 구현](https://github.com/Wody95/openMarket/blob/openMarket/README.md#3-5-%EC%83%81%ED%92%88-%EC%82%AD%EC%A0%9C-%EA%B5%AC%ED%98%84)
+
+## [4. 유닛 테스트](https://github.com/Wody95/openMarket/blob/openMarket/README.md#4-%EC%9C%A0%EB%8B%9B%ED%85%8C%EC%8A%A4%ED%8A%B8)
+
+## [5. 트러블 슈팅](https://github.com/Wody95/openMarket/blob/openMarket/README.md#5-%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
+ 
+ 
 ## 1. 프로젝트 개요
 
 ### 1-1. 프로젝트 관리
@@ -23,7 +49,7 @@ GitHub Issues를 통한 프로젝트의 목표와 각 커밋의 해당 목표 �
 
 프로젝트의 UI 구성은 코드를 통해 구현했으며 SnapKit을 이용해 오토레이아웃을 구성했습니다.
 
-### 1-4. 기술스택
+### 1-4. 기술 스택
 
 | 카테고리 | 기술 스택 |
 | --- | --- |
@@ -61,13 +87,13 @@ multipart/form-data |
 ![상세화면보기](https://user-images.githubusercontent.com/44163277/144873477-10add5e5-b05b-481a-94f2-a7c46630105d.gif)
 
 
-### 2-4. 등록
+### 2-4. 상품 등록
 
 네이비게이션바의 우측 버튼을 통해 새로운 상품을 서버에 등록합니다.
 
 ![상품등록화면이동](https://user-images.githubusercontent.com/44163277/144873523-3a5cabd2-54b7-4e5d-89c2-68bd62e03191.gif) ![상품등록화면사진추가](https://user-images.githubusercontent.com/44163277/144873603-0bb7020b-4cd2-4163-ab8d-8341b0c075d0.gif) ![상품등록실행](https://user-images.githubusercontent.com/44163277/144873644-de7adf37-4d53-48fb-9024-7ef279fc8974.gif)
 
-### 2-5. 수정
+### 2-5. 상품 수정
 
 상품 상세 화면의 우측 상단에 Edit 버튼을 통해 상품을 수정할 수 있습니다.
 
@@ -78,7 +104,7 @@ multipart/form-data |
 <img width="252" alt="상품수정화면버튼강조" src="https://user-images.githubusercontent.com/44163277/144873756-bb2d4ecb-2e90-4423-9b87-68b78db5d0df.png">![상품수정화면](https://user-images.githubusercontent.com/44163277/144873776-ce302452-e4d2-4f8b-ae9b-6d996ee86265.gif)
 
 
-### 2-6. 삭제
+### 2-6. 상품 삭제
 상품을 삭제하는 기능입니다. 상품을 삭제한 후 상세 화면을 Pop하고 상품 목록으로 돌아가며 상품 목록을 갱신합니다.
 ![상품삭제](https://user-images.githubusercontent.com/44163277/144873815-5205698c-51fd-4ddc-9ee4-9a3b6bba5206.gif)
 
@@ -340,7 +366,7 @@ func updateItems(completion: @escaping () -> Void) {
 
 https://github.com/Wody95/openMarket/issues/7
 
-## 4. 유닛테스트
+## 4. 유닛 테스트
 
 ### 유닛테스트를 왜 해야 하고 해보는 경험이 중요한가?
 
