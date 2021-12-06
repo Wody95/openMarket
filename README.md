@@ -1,5 +1,3 @@
-# OpenMarket READ.ME
-
 # OpenMarket Project
 
 Rest API를 이용해 서버와 통신하고 상품을 관리하는 어플리케이션입니다.
@@ -174,7 +172,7 @@ ItemListViewController는 collectionView를 사용하면서 `CollectionViewDeleg
 
 ### 3-2. 상품 상세 구현
 
-![Untitled](OpenMarket%20READ%20ME%2074477020e28a4d8983e526315bd67fdc/Untitled%204.png)
+<img width="1102" alt="스크린샷 2021-12-06 오후 10 18 45" src="https://user-images.githubusercontent.com/44163277/144874471-667b1664-836e-4cc4-8c32-6b44591fabe5.png">
 
 1. `ItemListViewController`의 `Item Cell`을 클릭하면 `UICollectionViewDelegate`를 따라 `didSelectItem` 메서드가 실행됩니다. 이 때 메서드 안에서 `DetailItemViewController`가 생성되고 `Delegate`를 초기화합니다. 그리고 상품 목록의 id값을 기반으로 `ItemManager`를 통해 상세 정보를 서버에 요청한 후 네비게이션컨트롤러에 `DetailItemViewController`를 푸쉬합니다.
 2. 서버로부터 상세 정보 데이터를 응답받으면 이 정보를 `DetailItemViewController` 에 업데이트합니다. 이 때 Text데이터 및 상품의 이미지 정보 또한 업데이트 되면서 UI정보가 바뀌기 때문에 비동기작업을 진행할 때 Main Thread에서 작업을 진행합니다.
@@ -214,7 +212,7 @@ func downloadImages(completionHandler: @escaping () -> Void) {
 
 ### 3-3. 상품 등록 구현
 
-![Untitled](OpenMarket%20READ%20ME%2074477020e28a4d8983e526315bd67fdc/Untitled%205.png)
+<img width="903" alt="스크린샷 2021-12-06 오후 10 59 28" src="https://user-images.githubusercontent.com/44163277/144874510-92c58627-cead-4ee4-aef8-84196546eca8.png">
 
 상품 등록화면의 핵심 기능은 클라이언트에서 입력한 데이터를 서버에 업로드하는 것입니다. API에 따르면 서버에 업로드 하는 데이터 양식은 `multipart/form-data` 형식을 따르고 있으며 이미지와 같이 텍스트 데이터를 `POST method`로 `request` 해야 합니다.
 
@@ -246,7 +244,7 @@ func textViewDidEndEditing(_ textView: UITextView) {
 
 ### 등록 완료까지의 사용자 경험 향상을 위한 인디케이터 활용
 
-![Untitled](OpenMarket%20READ%20ME%2074477020e28a4d8983e526315bd67fdc/Untitled%206.png)
+<img width="347" alt="스크린샷 2021-12-06 오후 11 35 58" src="https://user-images.githubusercontent.com/44163277/144874570-9535413d-3356-4641-a5dc-cb99284e6c33.png">
 
 새로운 상품을 서버에 등록하기까지 요청은 딜레이가 있습니다. 그리고 그 시간은 충분히 기다릴 수 있을 정도로 짧더라도 언제 끝날지 예측하기 어렵습니다. 그래서 그 시간동안 앱이 멈춰있지 않고 동작하고 있다고 사용자에게 보여주는 방법으로 인디케이터를 활용했습니다.
 
@@ -275,7 +273,7 @@ func registryItem(item: [String:Any], images: [ImageFile]) {
 
 ### 3-4. 상품 수정 구현
 
-![Untitled](OpenMarket%20READ%20ME%2074477020e28a4d8983e526315bd67fdc/Untitled%207.png)
+<img width="1227" alt="스크린샷 2021-12-06 오후 11 28 52" src="https://user-images.githubusercontent.com/44163277/144874639-05bbec17-f39a-4f6c-bfa7-ce07461fb2f8.png">
 
 상품 수정은 상품 등록과 사용자 경험이 유사하기 때문에 `RegistryItemViewController`를 활용했습니다. `DetailItemViewController`로부터 접근한 상품 수정 화면에는 상품 정보를 `RegistryItemViewController`의 View의 `TextField.text` 값을 적용하고 사용자가 수정하고 싶은 정보를 수정 후 서버에 Patch request를 보내는 것으로 적용했습니다.
 
@@ -324,7 +322,7 @@ https://github.com/Wody95/openMarket/issues/7
 
 ### 3-5. 상품 삭제 구현
 
-![Untitled](OpenMarket%20READ%20ME%2074477020e28a4d8983e526315bd67fdc/Untitled%208.png)
+<img width="1208" alt="스크린샷 2021-12-06 오후 11 43 05" src="https://user-images.githubusercontent.com/44163277/144874682-96bfe79d-7bfb-4d8d-9442-0f63e15470da.png">
 
 상품 삭제는 상품에 대한 DetailItemViewController에서 비밀번호 정보와 함께 서버로 Delete method로 request하면 됩니다.
 
@@ -350,7 +348,7 @@ https://github.com/Wody95/openMarket/issues/7
 - 실제 서버와 통신하면 의도치 않은 결과를 불러올 수 있습니다. 예를 들어 우리는 서버에 `Item` 을 등록하는 코드를 테스트하길 원합니다. 그런데 실제 서버에 코드를 호출하면 데이터가 실제로 등록되기 때문에 의도치 않은 결과를 불러올 수 있습니다.
 - 이번 유닛테스트는 MVC 패턴을 사용하면서 ViewController와 연관된 타입의 테스트 진행이 어려웠지만 URLSession을 활용한 URLSessionProvider를 테스트하면서 네트워크와 무관한 네트워크 테스트를 진행해볼 수 있었고, 테스트가 가능하다는 MVVM 패턴에 대한 흥미가 생겼습니다.
 
-![Untitled](OpenMarket%20READ%20ME%2074477020e28a4d8983e526315bd67fdc/Untitled%209.png)
+<img width="747" alt="스크린샷 2021-12-07 오전 12 00 44" src="https://user-images.githubusercontent.com/44163277/144874736-ca0592e9-862b-41f0-81d3-d555dbaa86c2.png">
 
 URLSession의 `dataTask`는 네트워크 통신을 통해 서버의 데이터베이스에 `request`합니다. 그래서 네트워크와 무관한 URLSession 테스트를 위해서는 `dataTask`가 통신하는 과정을 가로채 `Mock` 을 반환해야 합니다. 그런데 꼭 dataTask의 통신과정을 가로챌 필요는 없습니다. URLSession의 dataTask를 `Mock` 으로 만들면 됩니다.
 
