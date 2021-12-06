@@ -6,7 +6,7 @@ class RightSideView: UIView {
     private let viewModeButton = UIButton(type: .system)
 
     private let addItemImage = UIImage(systemName: "plus")
-    private let addItemViewButton = UIButton(type: .system)
+    private let addItemButton = UIButton(type: .system)
 
     var viewControllerDelegate: ItemListViewControllerDelegate?
     var itemViewMode: ViewMode = .list
@@ -31,11 +31,11 @@ class RightSideView: UIView {
     }
 
     private func configureAddItemViewButton() {
-        self.addSubview(addItemViewButton )
+        self.addSubview(addItemButton )
 
-        addItemViewButton.frame = CGRect(x: 50, y: 10, width: 16, height: 16)
-        addItemViewButton.setImage(addItemImage, for: .normal)
-        addItemViewButton.addTarget(self, action: #selector(didTapAddItemButton), for: .touchUpInside)
+        addItemButton.frame = CGRect(x: 50, y: 10, width: 16, height: 16)
+        addItemButton.setImage(addItemImage, for: .normal)
+        addItemButton.addTarget(self, action: #selector(didTapAddItemButton), for: .touchUpInside)
     }
 
     @objc func didTapViewModeButton() {

@@ -9,7 +9,7 @@ enum RegistryAndPatchMode {
 class RegistryItemViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentsView = RegistryItemContentsView()
-    private let registryManager = RegistryAndPatchManager(urlsession: URLSessionProvider())
+    private let registryManager = RegistryManager(urlsession: URLSessionProvider())
     var delegate: ItemListViewControllerDelegate?
     var mode: RegistryAndPatchMode = .registry
 

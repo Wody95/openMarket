@@ -54,13 +54,11 @@ class ItemListViewController: UIViewController {
 
     private func setupItemManager() {
         itemManager.delegate = self
-        if itemManager.items.count == 0 {
-            self.itemManager.readItems(completion: nil)
-        }
+        itemManager.setupItemManager()
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (collectionView.contentOffset.y * 1.2) > (collectionView.contentSize.height - collectionView.bounds.size.height) {
+        if (collectionView.contentOffset.y) > (collectionView.contentSize.height - collectionView.frame.size.height) {
 
             if fetchingMore {
                 fetchingMore = false

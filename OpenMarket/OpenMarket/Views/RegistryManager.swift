@@ -1,6 +1,6 @@
 import Foundation
 
-class RegistryAndPatchManager {
+class RegistryManager {
     let urlsessionProvider: URLSessionProvider
     var patchItem: ResponseItem?
 

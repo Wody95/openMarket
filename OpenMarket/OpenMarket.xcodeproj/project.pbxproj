@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		702827502711AF9B001EAB3B /* ItemCollectionViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7028274F2711AF9B001EAB3B /* ItemCollectionViewGridCell.swift */; };
-		703328D12730D07100196B76 /* RegistryAndPatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703328D02730D07100196B76 /* RegistryAndPatchManager.swift */; };
+		703328D12730D07100196B76 /* RegistryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703328D02730D07100196B76 /* RegistryManager.swift */; };
 		703328D52734C3E300196B76 /* DetailItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703328D42734C3E300196B76 /* DetailItemViewController.swift */; };
 		703328D82734C41000196B76 /* DetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703328D72734C41000196B76 /* DetailItemView.swift */; };
 		703D237926E9BDE600FFCA6B /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D237826E9BDE600FFCA6B /* MockData.swift */; };
@@ -53,7 +53,7 @@
 
 /* Begin PBXFileReference section */
 		7028274F2711AF9B001EAB3B /* ItemCollectionViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewGridCell.swift; sourceTree = "<group>"; };
-		703328D02730D07100196B76 /* RegistryAndPatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryAndPatchManager.swift; sourceTree = "<group>"; };
+		703328D02730D07100196B76 /* RegistryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistryManager.swift; sourceTree = "<group>"; };
 		703328D42734C3E300196B76 /* DetailItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemViewController.swift; sourceTree = "<group>"; };
 		703328D72734C41000196B76 /* DetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemView.swift; sourceTree = "<group>"; };
 		703D237826E9BDE600FFCA6B /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
@@ -118,14 +118,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		703328D22734C3B000196B76 /* DetailItemView */ = {
+		703328D22734C3B000196B76 /* DetailItem */ = {
 			isa = PBXGroup;
 			children = (
 				7079E2E02738BDA90025C3E9 /* Model */,
 				703328D62734C3FA00196B76 /* View */,
 				703328D32734C3C100196B76 /* ViewController */,
 			);
-			name = DetailItemView;
+			name = DetailItem;
 			sourceTree = "<group>";
 		};
 		703328D32734C3C100196B76 /* ViewController */ = {
@@ -185,9 +185,9 @@
 		70548D1E26DCC5E0004ED445 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7084C323271FEB5100A851A3 /* ItemListView */,
-				703328D22734C3B000196B76 /* DetailItemView */,
-				7084C326271FEBC600A851A3 /* RegistryItemView */,
+				7084C323271FEB5100A851A3 /* ItemList */,
+				703328D22734C3B000196B76 /* DetailItem */,
+				7084C326271FEBC600A851A3 /* RegistryItem */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,15 +236,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		7084C323271FEB5100A851A3 /* ItemListView */ = {
+		7084C323271FEB5100A851A3 /* ItemList */ = {
 			isa = PBXGroup;
 			children = (
 				70E425832755FCEB00F28908 /* Model */,
-				70F08A882715940F000D74BC /* Cell */,
 				7084C325271FEB9A00A851A3 /* View */,
 				7084C324271FEB9400A851A3 /* ViewController */,
 			);
-			name = ItemListView;
+			name = ItemList;
 			sourceTree = "<group>";
 		};
 		7084C324271FEB9400A851A3 /* ViewController */ = {
@@ -258,20 +257,21 @@
 		7084C325271FEB9A00A851A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				70F08A882715940F000D74BC /* Cell */,
 				70943746270AE4B300244386 /* ItemCollectionView.swift */,
 				70943742270ADC0B00244386 /* RightSideView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		7084C326271FEBC600A851A3 /* RegistryItemView */ = {
+		7084C326271FEBC600A851A3 /* RegistryItem */ = {
 			isa = PBXGroup;
 			children = (
 				708EB019274B797C00ABD5E5 /* Model */,
 				7084C327271FEBDB00A851A3 /* View */,
 				7084C328271FEBE100A851A3 /* ViewController */,
 			);
-			name = RegistryItemView;
+			name = RegistryItem;
 			sourceTree = "<group>";
 		};
 		7084C327271FEBDB00A851A3 /* View */ = {
@@ -302,7 +302,7 @@
 		708EB019274B797C00ABD5E5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				703328D02730D07100196B76 /* RegistryAndPatchManager.swift */,
+				703328D02730D07100196B76 /* RegistryManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -499,7 +499,7 @@
 				703328D52734C3E300196B76 /* DetailItemViewController.swift in Sources */,
 				706CB336270197410008274C /* URLSessionDataTaskError.swift in Sources */,
 				70943749270AE4DB00244386 /* ItemCollectionViewListCell.swift in Sources */,
-				703328D12730D07100196B76 /* RegistryAndPatchManager.swift in Sources */,
+				703328D12730D07100196B76 /* RegistryManager.swift in Sources */,
 				70A3E8042726BC4D00CE1432 /* ImageManager.swift in Sources */,
 				70D05F9B270BE76200466B0A /* ViewMode.swift in Sources */,
 				70AAEAC826E0C78800C631B0 /* URLSessionProvider.swift in Sources */,

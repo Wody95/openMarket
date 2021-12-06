@@ -67,5 +67,12 @@ class ItemManager {
             }
         }
     }
+
+    func setupItemManager() {
+        if items.count == 0 {
+            readItems(completion: nil)
+        }
+    }
+
 }
 
