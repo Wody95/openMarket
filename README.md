@@ -54,7 +54,7 @@ GitHub Issues를 통한 프로젝트의 목표와 각 커밋의 해당 목표 �
 | ----------- | ---------------------- |
 | UI          | UIKit / SnapKit        |
 | Network     | URLSession             |
-| DataParsing | Encodabel / Decodable<br> JSONEncoder / JSONDecoder<br> multipart/form-data |
+| DataParsing | Encodable / Decodable<br> JSONEncoder / JSONDecoder<br> multipart/form-data |
 | Test | XCTest |
 
 ## 2. 기능
@@ -244,7 +244,7 @@ func downloadImages(completionHandler: @escaping () -> Void) {
 
 마지막으로 등록화면과 함께 상품 정보를 관리하는 패스워드 텍스트를 입력하고 request에 성공하면 등록한 상품이 상세화면으로 이동합니다.
 
-### TextView의 PlaceHolder 구현
+### TextView의 placeholder 구현
 
 제품의 이름 및 가격, 수량 등등의 텍스트 정보는 대부분 UITextField로 구현하여 placeholder 기능을 사용할 수 있지만 제품 설명의 경우는 여러줄의 텍스트 데이터가 들어갈 수 있으므로 UITextView를 사용했습니다. 그래서 placeholder기능이 기본적으로 제공되지 않아 직접 구현했습니다.
 
